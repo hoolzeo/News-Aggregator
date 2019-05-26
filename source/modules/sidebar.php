@@ -3,6 +3,8 @@
     Ночная тема <input type="checkbox" id="nightTheme">
   </div>
 
+  <!--
+
 	<?php if ( isset ($_SESSION['logged_user']) ) : ?>
 		Авторизован! <br/>
 		Привет, <?php echo $_SESSION['logged_user']->login; ?>!<br/>
@@ -19,6 +21,8 @@
     <div class="cabinet-auth"> <input type="submit" id="auth" value="Авторизация"></div>
     <div class="cabinet-reg"> <input type="submit" id="reg" value="Регистрация"></div>
   </div>
+
+!-->
 
   <div class="block-tags">
     <div class="block-title">Популярные теги</div>

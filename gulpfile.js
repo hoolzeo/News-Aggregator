@@ -1,6 +1,5 @@
 var
   gulp = require('gulp'),
-  htmlmin = require('gulp-html-minifier'),
   watch = require('gulp-watch'),
   prefixer = require('gulp-autoprefixer'),
   uglify = require('gulp-uglify'),
@@ -19,7 +18,7 @@ var config = {
     baseDir: "./release",
     proxy: 'newz.ru'
   },
-  tunnel: true,
+  tunnel: false,
   host: 'localhost',
   port: 9000,
   logPrefix: "Frontend_Devil"
@@ -27,7 +26,6 @@ var config = {
 
 var path = {
   build: { //Тут мы укажем куда складывать готовые после сборки файлы
-    html: 'release/',
     php: 'release/',
     js: 'release/js/',
     css: 'release/css/',
@@ -35,8 +33,7 @@ var path = {
     fonts: 'release/fonts/'
   },
   src: { //Пути откуда брать исходники
-    html: 'source/*.html', //Синтаксис src/*.html говорит gulp что мы хотим взять все файлы с расширением .html
-    php: 'source/*.php', //Синтаксис src/*.html говорит gulp что мы хотим взять все файлы с расширением .html
+    php: 'source/**/*.php',
     js: 'source/js/**/*.js',//В стилях и скриптах нам понадобятся только main файлы
     style: 'source/css/**/*.css',
     less: 'source/less/**/*.less',
@@ -44,8 +41,7 @@ var path = {
     fonts: 'source/fonts/**/*.*'
   },
   watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
-    html: 'source/*.html',
-    php: 'source/*.php',
+    php: 'source/**/*.php',
     js: 'source/js/**/*.js',
     less: 'source/less/**/*.less',
     style: 'source/css/**/*.css'
@@ -69,15 +65,9 @@ gulp.task('style:build', function () {
       .pipe(reload({stream: true}));
 });
 
-gulp.task('html:build', function () {
-    gulp.src([path.src.php, path.src.html])
-        .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest(path.build.html))
-        .pipe(reload({stream: true}));
-});
-
-gulp.task('php:build', function() {
-    gulp.src(['source/modules/**/*.php']).pipe(gulp.dest('release/modules'));
+gulp.task('php:build', function () {
+    gulp.src([path.src.php])
+        .pipe(gulp.dest(path.build.php));
 });
 
 gulp.task('js:build', function () {
@@ -98,7 +88,6 @@ gulp.task('fonts:build', function() {
 });
 
 gulp.task('build', [
-    'html:build',
     'js:build',
     'style:build',
     'php:build',
@@ -112,12 +101,8 @@ gulp.task('clean', function () {
 });
 
 gulp.task('watch', function(){
-    watch([path.watch.html, path.watch.php], function(event, cb) {
-      gulp.start('html:build');
-    });
-
-    watch(['source/modules/**/*.php'], function(event, cb) {
-        gulp.start('php:build');
+    watch([path.watch.php], function(event, cb) {
+      gulp.start('php:build');
     });
 
     watch([path.watch.js], function(event, cb) {

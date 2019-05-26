@@ -63,7 +63,20 @@ $lastPage = ceil($countAllNews/$countView);
       <div class="news-list">
         <!-- вывод новостей -->
         <?php foreach($sql as $post) {
-          outputImagePost( $post['id'], $post['title'], $post['img'], $post['link']);
+
+          $image = $post['img'];
+
+          if (isset($post['img_local'])) {
+            $img_local = $_SERVER['DOCUMENT_ROOT'] . "//images//news//" . $post['img_local'];
+            if (file_exists($img_local)) {
+              $image = $post['img_local'];
+            }
+          }
+
+          if (!isHaveText($image, 'http')) $image = '/images/news/' . $image;
+
+          outputImagePost( $post['id'], $post['title'], $image, $post['link']);
+
         }
         ?>
 
