@@ -1,0 +1,138 @@
+/* reset */
+.wrap {
+  width: 100%;
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+
+  border-top: 1px solid #eeeeef;
+  border-bottom: 1px solid #eeeeef;
+}
+
+.show {
+  display: block
+}
+
+.slider_link {
+  margin-top: 3px;
+}
+
+.slider_link a {
+  color: black;
+  text-decoration: none;
+  transition: 0.2s all;
+}
+
+.slider_link a:hover {
+  color: #1e63e6;
+}
+
+.slider-block h2 {
+  margin-bottom: 10px;
+}
+
+/* transition */
+.nav-ctrl span, .dots-ctrl span {
+  transition: all 0.3s
+}
+
+/*** CONTENT ***/
+.gallery {
+  width: 100%;
+  visibility: hidden;
+}
+
+.slider {
+  width: 100%;
+  max-width: 1024px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto
+}
+
+.stage {
+  overflow: hidden
+}
+
+.stage>div {
+  float: left;
+  position: relative
+}
+
+.stage>div img {
+  width: 100%;
+  max-width: 800px;
+  height: 120px;
+}
+
+.control {
+  width: 100%;
+  text-align: center;
+  position: relative
+}
+
+.nav-ctrl {
+  display: none;
+  line-height: 20px;
+  margin-top: 10px
+}
+
+.nav-ctrl span {
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 30px;
+  color: #eee;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 5px;
+  border: solid 1px #357ebd;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #1e63e6;
+  cursor: pointer;
+  transition: all 0.3s
+}
+
+.nav-ctrl span:hover {
+  border-color: #1550bd;
+  background-color: #1550bd
+}
+
+.nav-ctrl .disable, .nav-ctrl .disable:hover {
+  border: solid 1px #357ebd;
+  background-color: #1e63e6;
+  opacity: 0.4;
+  cursor: default
+}
+
+.dots-ctrl {
+  display: none;
+  margin-top: 10px
+}
+
+.dots-ctrl li {
+  display: inline-block
+}
+
+.dots-ctrl span {
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: 5px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #1e63e6;
+  opacity: 0.4;
+  cursor: pointer
+}
+
+.dots-ctrl .active span, .dots-ctrl span:hover {
+  opacity: 1
+}

@@ -1,0 +1,88 @@
+.block-tags {
+  background: #fff;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  box-shadow: @shadow-block;
+
+  .block-title {
+    margin-top: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+}
+
+.tags {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+
+ a {
+    border: 1px solid @color-main;
+    padding: 5px 6px;
+    font-size: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: @color-main;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    transition: 0.1s all;
+    background: transparent;
+    z-index: 2;
+  }
+}
+
+.taghover {
+  transition: all 0.2s;
+  position: absolute;
+  top: 0;
+  background: fade(@color-main,10%);
+  left: 0;
+  z-index: 1;
+  display: block;
+  border-radius: 5px;
+}
+
+.night-theme {
+  background: @color-main;
+  color: @color-one;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 17px;
+
+  input {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+.cabinet {
+  display: flex;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.cabinet-auth, .cabinet-reg {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.cabinet input {
+  cursor: pointer;
+}
+
+.cabinet-auth {
+  background: white;
+  color: @color-main;
+}
+
+.cabinet-reg {
+  background: white;
+  color: @color-main;
+}
