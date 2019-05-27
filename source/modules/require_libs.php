@@ -14,4 +14,19 @@ function isHaveText($str, $substr)
 	else return true;
 }
 
+function downloadFile ($URL, $PATH) {
+    $ReadFile = fopen ($URL, "rb");
+
+    if ($ReadFile) {
+        $WriteFile = fopen ($PATH, "wb");
+        if ($WriteFile){
+            while(!feof($ReadFile)) {
+                fwrite($WriteFile, fread($ReadFile, 4096 ));
+            }
+            fclose($WriteFile);
+        }
+        fclose($ReadFile);
+    }
+}
+
 ?>
