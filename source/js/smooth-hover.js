@@ -1,5 +1,5 @@
 
-const triggers = document.querySelectorAll('.tags a');
+const triggers = document.querySelectorAll('.tags div');
 const highlight = document.createElement('span');
 highlight.classList.add('taghover');
 document.body.append(highlight);

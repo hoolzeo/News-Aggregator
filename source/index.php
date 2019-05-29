@@ -59,13 +59,13 @@ $lastPage = ceil($countAllNews/$countView);
 
 
       <h1>Главные новости за сегодня</h1>
-
       <div class="news-list">
         <!-- вывод новостей -->
         <?php foreach($sql as $post) {
 
           $image = $post['img'];
 
+          // Проверяем есть ли локальное изображение
           if (isset($post['img_local'])) {
             $img_local = $_SERVER['DOCUMENT_ROOT'] . "//images//news//" . $post['img_local'];
             if (file_exists($img_local)) {
@@ -73,10 +73,12 @@ $lastPage = ceil($countAllNews/$countView);
             }
           }
 
-          if (!isHaveText($image, 'http')) $image = '/images/news/' . $image;
+          // Если изображение не из интернета, подставляем адрес локальной папки
+          if ((!isHaveText($image, 'http')) and (substr($image, 0, 2) != '//')) {
+            $image = '/images/news/' . $image;
+          }
 
           outputImagePost( $post['id'], $post['title'], $image, $post['link']);
-
         }
         ?>
 

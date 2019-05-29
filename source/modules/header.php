@@ -4,9 +4,9 @@
     <nav class="main-navigation">
       <ul>
         <li class="active"><a href="/">Главная</a></li>
-        <li><a href="/search.php">Поиск новостей</a></li>
-        <li><a href="/copyright.php">Правообладателям</a></li>
-        <li><a href="/sources.php">Список источников</a></li>
+        <li><a href="/pages/search.php">Поиск новостей</a></li>
+        <li><a href="/pages/copyright.php">Правообладателям</a></li>
+        <li><a href="/pages/sources.php">Список источников</a></li>
         <li><a href="/pages/admin/index.php">Админ-панель</a></li>
       </ul>
     </nav>

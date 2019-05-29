@@ -19,7 +19,7 @@
   flex-wrap: wrap;
   margin-top: 10px;
 
- a {
+  div {
     border: 1px solid @color-main;
     padding: 5px 6px;
     font-size: 15px;
@@ -32,6 +32,7 @@
     transition: 0.1s all;
     background: transparent;
     z-index: 2;
+    cursor: pointer;
   }
 }
 
@@ -59,30 +60,4 @@
     margin-left: 10px;
     cursor: pointer;
   }
-}
-
-.cabinet {
-  display: flex;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.cabinet-auth, .cabinet-reg {
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-}
-
-.cabinet input {
-  cursor: pointer;
-}
-
-.cabinet-auth {
-  background: white;
-  color: @color-main;
-}
-
-.cabinet-reg {
-  background: white;
-  color: @color-main;
 }

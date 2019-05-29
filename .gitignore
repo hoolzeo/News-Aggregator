@@ -2,6 +2,8 @@
 
 # dependencies
 node_modules/
+release/
+
 
 # misc
 .DS_Store
@@ -16,3 +18,4 @@ yarn-error.log*
 
 
 *.7z
+*.jpg

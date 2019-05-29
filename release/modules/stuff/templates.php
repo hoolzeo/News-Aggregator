@@ -15,11 +15,17 @@ function outputLinksPost($id, $title, $source) {
   echo '  </a></li>';
 }
 
-function outputImagePost($id, $title, $img, $source) {
+function outputImagePost($id, $title, $image, $source) {
   echo '<div class="cart">';
   echo '<div class="cart-image">';
-  echo '<a href="/pages/view.php?id='.$id.'"><img src="'.$img.'"></a>';
-	echo '<div class="source">'.getSourceInfo($source, 'name').'</div>';
+
+	if(isset($image)) {
+		echo '<a href="/pages/view.php?id='.$id.'"><img src="'.$image.'"></a>';
+		echo '<div class="source">'.getSourceInfo($source, 'name').'</div>';
+	} else {
+		echo '<a href="/pages/view.php?id='.$id.'"><img src="/images/noimg.jpg"></a>';
+		echo '<div class="source" style="color: gray">'.getSourceInfo($source, 'name').'</div>';
+	}
   echo '   </div>';
   echo '   <div class="cart-title done"><a href="/pages/view.php?id='.$id.'">'.$title.'</a></div>';
   echo '   </div>';
