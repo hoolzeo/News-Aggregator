@@ -5,6 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
   $name = $_POST["name"];
   $page_id = $_POST["page_id"];
   $message = $_POST["message"];
+  $auth = $_POST["auth"];
 
   $name = htmlspecialchars($name);// Преобразуем спецсимволы в HTML-сущности
   $message = htmlspecialchars($message);// Преобразуем спецсимволы в HTML-сущности
@@ -13,6 +14,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
   if (!empty($name)) $sql_comments->name = $name;
   if (!empty($page_id)) $sql_comments->page_id = $page_id;
   if (!empty($message)) $sql_comments->message = $message;
+  if (!empty($auth)) $sql_comments->auth = $auth;
   $sql_comments->date = date("d-m-Y в H:i:s");
 
   R::store($sql_comments);

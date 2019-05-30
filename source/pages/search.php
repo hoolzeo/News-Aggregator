@@ -1,7 +1,36 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
-?>
 
+if ( isset($_GET['search_title']) || isset($_GET['search_text']) ) {
+  if(isset($_GET['words'])) {
+
+    $search_word = $_GET['words'];
+
+    // Обрезаем окончания у слов для более эффективного поиска
+    function DeleteEndings($word) {
+        $word = preg_replace("/("."ых|ый|ы|ой|ое|ые|ому|ом|ами|ам|ая|ат|ать|а|овый|ов|ого|ох|о|у|ему|ей|е|ство|ия|ий|и|ять|ь|я|он|ют|".")$/i", "", $word); //удаляем окончания
+        return $word;
+    }
+
+    $search_word_full = $search_word;
+
+    $search_word = DeleteEndings($search_word);
+
+    $search_title = isset($_GET['search_title']);
+    $search_text = isset($_GET['search_text']);
+
+    if (($search_title) and ($search_text)) {
+      $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" OR `text` LIKE "%'.$search_word.'%"';
+    } else {
+      if ($search_title) $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%"';
+      if ($search_text) $query_select = 'SELECT * FROM posts WHERE `text` LIKE "%'.$search_word.'%"';
+    }
+
+    $query = R::getAll($query_select);
+  }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -21,49 +50,21 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
     <main>
       <div id="search">
 
-      <style media="screen">
-        #search-wrapper {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .search-input input[name=words] {
-          width: 180px;
-        }
-
-        .checkbox-block {
-          display: flex;
-          align-items: center;
-        }
-
-        .checkbox-title {
-          margin-top: -5px;
-          margin-right: 5px;
-        }
-
-        .search-input {
-          padding: 7px 10px;
-          width: 406px;
-          border-radius: 2px;
-        }
-      </style>
-
       <form method="GET" action="search.php" id="search-wrapper">
 
       <div class="search-input">
-        <input type="text" name="words" placeholder="Что ищем?" required />
+        <input type="text" name="words" placeholder="Что ищем?" <?php if ($search_word_full) echo 'value="'.$search_word_full.'"' ?> required />
         <input type="submit" value="Поиск">
       </div>
 
       <div class="checkbox-block">
         <div class="checkbox-title">Искать в заголовках</div>
-        <div class="checkbox-div"><input type="checkbox" name="search_title" id="search_title" checked></div>
+        <div class="checkbox-div"><input type="checkbox" name="search_title" id="search_title" <?php if (($search_title) or (!$search_word)) echo 'checked' ?>></div>
       </div>
 
       <div class="checkbox-block">
         <div class="checkbox-title">Искать в тексте новости</div>
-        <div class="checkbox_div"><input type="checkbox" name="search_text" id="search_text"></div>
+        <div class="checkbox_div"><input type="checkbox" name="search_text" id="search_text" <?php if ($search_text) echo 'checked' ?>></div>
       </div>
 
       </form>
@@ -73,29 +74,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
       <hr />
 
       <div class="news-list">
-
 <?php
-
-if ( isset($_GET['search_title']) || isset($_GET['search_title']) ) {
-  if(isset($_GET['words'])) {
-    $search_word = $_GET['words'];
-    $search_title = isset($_GET['search_title']);
-    $search_text = isset($_GET['search_text']);
-
-    if (($search_title) and ($search_text)) {
-      $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" OR `text` LIKE "%'.$search_word.'%"';
-    } else {
-      if ($search_title) $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%"';
-      if ($search_text) $query_select = 'SELECT * FROM posts WHERE `text` LIKE "%'.$search_word.'%"';
-    }
-
-    $query = R::getAll($query_select);
-
-    foreach ($query as $post) {
-      outputImagePost( $post['id'], $post['title'], $post['img'], $post['link']);
-    }
+if ($query) {
+  foreach ($query as $post) {
+    outputImagePost( $post['id'], $post['title'], $post['img'], $post['link']);
   }
 }
+
 ?>
 
 </div>

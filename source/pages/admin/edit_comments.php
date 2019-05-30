@@ -19,21 +19,19 @@ if(isset($_GET['id'])) {
   }
 }
 
-if(isset($_comment['edit_button'])) {
-  if($_comment['edd_name_comment'])$edd_name_comment = $_comment['edd_name_comment'];
-  if($_comment['edd_message_comment'])$edd_message_comment = $_comment['edd_message_comment'];
-  if($_comment['edd_id_comment'])$edd_id_comment = $_comment['edd_id_comment'];
+if(isset($_POST['edit_button'])) {
+  if($_POST['edd_name_comment'])$edd_name_comment = $_POST['edd_name_comment'];
+  if($_POST['edd_message_comment'])$edd_message_comment = $_POST['edd_message_comment'];
+  if($_POST['edd_id_comment'])$edd_id_comment = $_POST['edd_id_comment'];
 
   if($edd_name_comment & $edd_message_comment & $edd_id_comment)
   {
     R::exec( 'UPDATE `comments` SET `name`="' . $edd_name_comment . '", `message`="'.$edd_message_comment.'" WHERE `id` = ' . $edd_id_comment);
-    ShowMessage('Комментарий отредактирован!', 'good');
-    header("Refresh:0;");
+    header("Refresh:0; url=/pages/admin/comments.php");
   } else {
     ShowMessage('Заполните все поля!', 'error');
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -62,6 +60,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
           <textarea class="form_text" name="edd_message_comment" rows="10">$message</textarea>
           <input type="submit" name="edit_button" value="Редактировать">
         </form>
+
 END;
       ?>
       </table>

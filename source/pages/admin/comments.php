@@ -29,14 +29,17 @@ function outputListCommentsAdmin($id, $name, $page_id, $message, $date) {
   // Получаем заголовок новости
   $news = R::load('posts', $page_id);
   $post_title = $news->title;
+  $full_message = $message;
 
   // Обрезаем заголовок, если длина больше 60 символов
   if (mb_strlen($post_title) > 60) {
     $post_title = mb_substr($post_title,0,60) . '...';
   }
 
-  $full_message = $message;
-  $message = mb_substr($message,0,150) . '...';
+  // Обрезаем заголовок, если длина больше 60 символов
+  if (mb_strlen($message) > 150) {
+    $message = mb_substr($message,0,150) . '...';
+  }
 
   echo <<<END
   <tr id="$id">
@@ -52,13 +55,6 @@ function outputListCommentsAdmin($id, $name, $page_id, $message, $date) {
 END;
 }
 ?>
-
-<style media="screen">
-  .list_message {
-    max-width: 350px;
-    word-wrap: break-word;
-  }
-</style>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -78,15 +74,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
     <main>
       <h1>Список комментариев</h1>
       <hr>
-
-      <div id="result"></div>
       <table id="list">
         <tr>
           <th>ID</th>
           <th>Имя</th>
           <th>Комментарий</th>
           <th>Дата</th>
-          <th>Новость</th>
+          <th>Действия</th>
         </tr>
         <?php
 

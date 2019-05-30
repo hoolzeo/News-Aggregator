@@ -49,28 +49,22 @@ if(isset($_GET['id'])) {
               		<div id="form_comments" >
                     <form name="comment" action="/modules/stuff/comment.php" method="post">
                       <div class="forma_inputs">
-              					<input required type="text" name="name" placeholder="Ваше имя" title="Введите Ваше имя" maxlength="30">
+                        <?php
+                        if ( isset ($_SESSION['logged_user']) ) {
+                          $userlogin = $_SESSION['logged_user']->login;
+                          echo '<input name="auth" type="hidden" value="1">';
+                          echo '<input type="text" name="name" value="' . $userlogin . '" readonly maxlength="30">';
+                        } else {
+                          echo '<input name="auth" type="hidden" value="0">';
+                          echo '<input required type="text" name="name" placeholder="Ваше имя" title="Введите Ваше имя" maxlength="30">';
+                        }
+                        ?>
               					<textarea required name="message" id="cmtx_comment" placeholder="Ваш комментарий .." title="Введите свой комментарий" maxlength="1000"></textarea>
               				</div>
                         <input type="hidden" name="page_id" value="<?php echo $news_id ?>" />
                         <input type="submit" class="btn-blue" value="Добавить комментарий">
                     </form>
               		</div>
-
-                	<div class="comment_over" hidden>
-              		<div class="comment">
-              			<div class="comment_avatar"><img src="https://pp.userapi.com/c840637/v840637531/129c3/0h3rRFSpGAw.jpg" width="64" alt="" /></div>
-              			<div class="comment_message">
-              				<div class="comment_top"><a href="javascript://" rel="nofollow" onclick="window.open('/index/8-1481', 'up1481', 'scrollbars=1,top=0,left=0,resizable=1,width=700,height=375'); return false;">nikitka530</a> <span class="comm_time">12.08.2017 в 19:25</span></div>
-              				<div class="comment_message_in">Эмка падение икара есть в дефолтном виде,на gаmеbаnana точка cоm крч там красиво сделано,но тебе придется поискать там,там же много файлов и мусора,найди тот самый и качай! А вот калаш красная линия есть,но я забыл где,тоже в дефолтном виде,есть даже с наклейками Астралис! Там надпись dev1ce написано,крч очень крутой! Поищи в интернете "Cs 1.6 Ak47 pack"
-              					<div class="comment_answer_button"><a href="javascript://" rel="nofollow" onclick="new _uWnd('AddC','Добавить комментарий',-550,-100,{autosize:1,closeonesc:1,resize:0},{url:'/index/58-3011'});return false;">Ответить</a></div>
-              				</div>
-              			</div>
-              		</div>
-              	</div>
-
-
-
 
 <?php
 
@@ -81,7 +75,18 @@ echo $date;
   $comments = R::getAll( "SELECT * FROM `comments` WHERE `page_id`='$page_id'" );
   foreach ($comments as $comment) { ?>
     <div class="comment">
-    <div class="comment_top"><b><?php echo $comment['name'] ?></b> <span class="comm_time"><?php echo str_replace('-','.',$comment['date']) ?></span></div>
+    <div class="comment_top"><b>
+      <?php
+      $comment_login = $comment['name'];
+
+      // Это коммент от авторизованного пользователя?
+      if ($comment['auth'] == 1) {
+        $comment_userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$comment_login.'"');
+        echo '<a class="comment_profile_link" href="/pages/cabinet/viewprofile.php?id=' . $comment_userID . ' ">' . $userlogin . '</a>';
+      } else {
+        echo $userlogin;
+      }
+    ?></b> <span class="comm_time"><?php echo str_replace('-','.',$comment['date']) ?></span></div>
     <div class="comment_message_in"><?php echo $comment['message'] ?>
     </div>
     </div>
