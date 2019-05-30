@@ -21,6 +21,12 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
       <h1>Функции админа</h1>
       <hr>
 
+      <ul>
+        <li><a href="news.php">Список новостей</a></li>
+        <li><a href="users.php">Список пользователей</a></li>
+        <li><a href="comments.php">Список комментариев</a></li>
+      </ul>
+
       <h2>Работа с источниками новостей</h2>
       <button id="CreateSources">Создать базу источников</button>
       <button id="ParsePosts">Добавить новости</button>

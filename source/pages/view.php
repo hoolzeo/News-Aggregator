@@ -31,7 +31,7 @@ if(isset($_GET['id'])) {
   require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
 
   <div class="wrapper container">
-    <main>
+    <main id="page_post">
 
 <h1><?php echo $title ?></h1>
 <div class="estimated-time"> <i class="fa fa-clock-o"></i> <?php echo "Приблизительное время чтения: " . read_time_estimate($text);?> </div>
@@ -47,7 +47,7 @@ if(isset($_GET['id'])) {
 
               <h2>Комментарии</h2>
               		<div id="form_comments" >
-                    <form name="comment" action="modules/stuff/comment.php" method="post">
+                    <form name="comment" action="/modules/stuff/comment.php" method="post">
                       <div class="forma_inputs">
               					<input required type="text" name="name" placeholder="Ваше имя" title="Введите Ваше имя" maxlength="30">
               					<textarea required name="message" id="cmtx_comment" placeholder="Ваш комментарий .." title="Введите свой комментарий" maxlength="1000"></textarea>

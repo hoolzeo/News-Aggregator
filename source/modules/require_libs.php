@@ -29,4 +29,8 @@ function downloadFile ($URL, $PATH) {
     }
 }
 
+function ShowMessage($text, $type) {
+  echo '<script>alert("' . $text . '")</script>';
+}
+
 ?>

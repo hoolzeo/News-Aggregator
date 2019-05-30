@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../libs/RedBeanPHP/db.php";
+require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
   /* Принимаем данные из формы */
   $name = $_POST["name"];
@@ -14,7 +14,7 @@ require __DIR__ . "/../libs/RedBeanPHP/db.php";
   if (!empty($page_id)) $sql_comments->page_id = $page_id;
   if (!empty($message)) $sql_comments->message = $message;
   $sql_comments->date = date("d-m-Y в H:i:s");
-  
+
   R::store($sql_comments);
 
   header("Location: ".$_SERVER["HTTP_REFERER"]);// Делаем реридект обратно
