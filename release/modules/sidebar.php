@@ -7,7 +7,7 @@
     <?php
       if ( isset ($_SESSION['logged_user']) ) {
         echo '<a href="/pages/cabinet/viewprofile.php?id=' . $userID . ' ">Мой профиль</a>';
-        echo '<input type="submit" id="profile_exit" value="Выйти из аккаунта">';
+        echo '<a href="/pages/cabinet/logout.php">Выйти</a>';
       } else {
         echo 'Вы не авторизованы<br/>';
         echo '<a href="/pages/cabinet/login.php">Авторизация</a>';
@@ -15,14 +15,6 @@
       }
     ?>
   </div>
-
-  <script type="text/javascript">
-  $(function() {
-    $( "#profile_exit" ).click(function() {
-      window.location.href = "/pages/cabinet/logout.php";
-    });
-  });
-  </script>
 
   <div class="block-tags">
     <div class="block-title">Популярные теги</div>

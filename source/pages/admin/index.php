@@ -27,10 +27,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
         <li><a href="comments.php">Список комментариев</a></li>
       </ul>
 
-      <h2>Работа с источниками новостей</h2>
+      <hr>
+
+      <h2>Работа с новостями</h2>
       <button id="CreateSources">Создать базу источников</button>
       <button id="ParsePosts">Добавить новости</button>
       <button id="ParseIcons">Собрать иконки сайтов</button>
+      <button id="DownloadImages">Скачать изображения новостей</button>
 
       <br><br><hr>
 
@@ -42,7 +45,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
 
       <script>
       $("#CreateSources" ).click(function() {
-        $.post("functions/create_db.php", function(data){
+        $.post("functions/add_sources.php", function(data){
+          $('#result').html(data);
+        });
+      });
+
+      $("#DownloadImages" ).click(function() {
+        $.post("functions/download_images.php", function(data){
           $('#result').html(data);
         });
       });

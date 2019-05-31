@@ -2,17 +2,51 @@
 require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/templates.php';
 
+// Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {
   $userlogin = $_SESSION['logged_user']->login;
   $userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$userlogin.'"');
 
   $getStopWords = R::getAll( 'SELECT `stop_words` FROM `users` WHERE `login` = "'.$userlogin.'" LIMIT 1' );
   $stop_words_string = $getStopWords[0]['stop_words'];
-  
+
   $stop_words = explode(",", $getStopWords[0]['stop_words']);
 
   // Обрезаем окончания у стоп-слов
   for ($i = 0; $i<count($stop_words);$i++) $stop_words[$i] = DeleteEndings($stop_words[$i]);
+}
+
+
+function getSourceInfo($source, $column) {
+	$sources = R::getAll( 'SELECT * FROM sources' );
+  foreach ($sources as $item) {
+    if (isHaveText($source, $item['url'])) {
+			return $item[$column];
+    }
+  }
+}
+
+function outputLinksPost($id, $title, $source) {
+  echo '<li id="'.$id.'"><a href="/pages/view.php?id='.$id.'">';
+	echo '<div class="source-icon"><img src="/images/icons/sites/16/'.GetRootUrl($source).'.ico"></div>';
+  echo '    <div class="title">'.$title.'</div>';
+  echo '  </a></li>';
+}
+
+function outputImagePost($id, $title, $image, $source) {
+  echo '<div class="cart" id="'.$id.'">';
+  echo '<div class="cart-image">';
+
+	if(isset($image)) {
+		echo '<a href="/pages/view.php?id='.$id.'"><img src="'.$image.'"></a>';
+		echo '<div class="source">'.getSourceInfo($source, 'name').'</div>';
+	} else {
+		echo '<a href="/pages/view.php?id='.$id.'"><img src="/images/noimg.jpg"></a>';
+		echo '<div class="source" style="color: gray">'.getSourceInfo($source, 'name').'</div>';
+	}
+  echo '   </div>';
+  echo '   <div class="cart-title done"><a href="/pages/view.php?id='.$id.'">'.$title.'</a></div>';
+  echo '   </div>';
 }
 
 function GetRootUrl($link) {

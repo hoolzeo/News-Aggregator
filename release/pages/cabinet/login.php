@@ -12,23 +12,15 @@ if ( isset($data['do_login']) )
 		{
 			//если пароль совпадает, то нужно авторизовать пользователя
 			$_SESSION['logged_user'] = $user;
-			echo '<div style="color:dreen;">Вы авторизованы!<br/> Можете перейти на <a href="/">главную</a> страницу.</div><hr>';
+			header('Location: /');
 		}else
 		{
-			$errors[] = 'Неверно введен пароль!';
+			ShowMessage('Неверно введен пароль!', 'error');
 		}
 
-	}else
-	{
-		$errors[] = 'Пользователь с таким логином не найден!';
+	} else {
+		ShowMessage('Пользователь с таким логином не найден!', 'error');
 	}
-
-	if ( ! empty($errors) )
-	{
-		//выводим ошибки авторизации
-		echo '<div id="errors" style="color:red;">' .array_shift($errors). '</div><hr>';
-	}
-
 }
 ?>
 <!DOCTYPE html>
@@ -37,11 +29,11 @@ if ( isset($data['do_login']) )
 
   <title>Авторизация</title>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php'; ?>
 </head>
 <body>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php'; ?>
 
   <div class="wrapper container">
     <main id="sources">
@@ -59,13 +51,13 @@ if ( isset($data['do_login']) )
 
     </main>
 
-    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php'; ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php'; ?>
 
   </div>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php'; ?>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/auth.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/chunks/auth.php'; ?>
 
 </body>
 

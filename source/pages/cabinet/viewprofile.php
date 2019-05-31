@@ -12,7 +12,9 @@ if(isset($_GET['id'])) {
       $login = $user['login'];
     }
   } else {
-    echo 'Данного пользователя не существует';
+    header( "HTTP/1.1 404 Not Found" );
+    header( "Location: /404.php" );
+    exit();
   }
 }
 

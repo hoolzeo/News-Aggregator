@@ -21,10 +21,18 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
   <div class="wrapper container">
     <main>
 <?php
- R::wipe('posts'); // удаляем все записи из таблицы posts
+function WriteLog($text) {
+  $file_logs = $_SERVER['DOCUMENT_ROOT'].'/logs.txt';
+
+  $fd = fopen($file_logs, 'a') or die("Не удалось создать файл");
+  fputs($fd, $text . "\n");
+  fclose($fd);
+}
 
 function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text, $if_decode, $post_image = null, $category = null)
 {
+  $current_date = date("d/m/Y G:i");
+
 	$data_site = file_get_contents($host); // получаем страницу сайта-донора
 	$document = phpQuery::newDocument($data_site);
 	$content_prev = $document->find($item);
@@ -115,17 +123,12 @@ function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text,
 					if ($if_decode) {
             $title = utf8_decode($title);
             $article_text = utf8_decode($article_text);
-            echo 'need decode';
-          } else {
-            echo 'no need decode';
           }
-
 				}
 
-        //echo $article_text;
         if  (!empty(trim($article_text))) {
 
-          echo '<br /><b>Опубликована новость:</b> ' . $title . '<br />';
+          WriteLog($current_date . ' | ' . $host . ' |  Успешно | ' . $title);
 
 					// Записываем информацию о превьюшках в базу данных
 					$user = R::dispense('posts');
@@ -135,16 +138,20 @@ function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text,
 					if (!empty($article_text)) $user->text = strip_tags($article_text, '<p>');;
           if (!empty($category)) $post->category = $category;
 					R::store($user);
-
+        } else {
+          WriteLog($current_date . ' | ' . $host . ' |  Ошибка | ' . $title);
         }
 			}
 		}
 	}
 }
 
-foreach ($marks as $current_site) {
-  //SiteParse($current_site['host'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category']);
-}
+// foreach ($marks as $current_site) {
+//  SiteParse($current_site['host'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category']);
+//}
+
+$current_site = $marks[0];
+SiteParse($current_site['host'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category']);
 ?>
 
     </main>

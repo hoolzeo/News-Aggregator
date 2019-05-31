@@ -95,9 +95,6 @@ function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text,
 					if ($if_decode) {
             $title = utf8_decode($title);
             $article_text = utf8_decode($article_text);
-            echo 'need decode';
-          } else {
-            echo 'no need decode';
           }
 
 				}

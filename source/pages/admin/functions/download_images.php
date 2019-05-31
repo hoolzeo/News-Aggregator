@@ -1,7 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 
-$query = R::getAll( 'SELECT `id`, `img` FROM posts ' );
+$query = R::getAll( 'SELECT `id`, `img` FROM posts WHERE img_local = "" ' );
 
 foreach ($query as $post) {
   $id = $post['id'];

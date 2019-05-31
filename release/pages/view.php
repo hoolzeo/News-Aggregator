@@ -14,7 +14,9 @@ if(isset($_GET['id'])) {
       $text = $post['text'];
     }
   } else {
-    echo 'Данной новости не существует';
+    header( "HTTP/1.1 404 Not Found" );
+    header( "Location: /404.php" );
+    exit();
   }
 }
 ?>
@@ -23,12 +25,12 @@ if(isset($_GET['id'])) {
 <html lang="ru">
 <head>
   <title><?php echo $title ?></title>
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php'; ?>
 </head>
 <body>
 
   <?php
-  require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
+  require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php'; ?>
 
   <div class="wrapper container">
     <main id="page_post">
@@ -47,7 +49,7 @@ if(isset($_GET['id'])) {
 
               <h2>Комментарии</h2>
               		<div id="form_comments" >
-                    <form name="comment" action="/modules/stuff/comment.php" method="post">
+                    <form name="comment" action="/modules/stuff/add_comment.php" method="post">
                       <div class="forma_inputs">
                         <?php
                         if ( isset ($_SESSION['logged_user']) ) {
@@ -96,13 +98,11 @@ echo $date;
 
 </main>
 
-    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php'; ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php'; ?>
 
   </div>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php'; ?>
-
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/auth.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php'; ?>
 
 </body>
 

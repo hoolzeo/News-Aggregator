@@ -91,11 +91,11 @@
 <html lang="ru">
 <head>
   <title>Регистрация</title>
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php'; ?>
 </head>
 <body>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php'; ?>
 
   <div class="wrapper container">
     <main id="sources">
@@ -122,13 +122,11 @@
 
 </main>
 
-<?php require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php'; ?>
 
 </div>
 
-<?php require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php'; ?>
-
-<?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/auth.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php'; ?>
 
 </body>
 
