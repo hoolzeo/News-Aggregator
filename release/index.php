@@ -3,6 +3,8 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 ?>
 
 <?php
+$page_title = 'Главная страница';
+
 $countView = 15; // количество материалов на странице
 
 // номер страницы
@@ -38,6 +40,7 @@ $lastPage = ceil($countAllNews/$countView);
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <title><?php echo $page_title ?></title>
   <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php'; ?>
 </head>
 <body>

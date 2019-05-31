@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <title>Админка</title>
+  <title>Админ-панель</title>
   <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php';
  ?>
