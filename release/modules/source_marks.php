@@ -2,6 +2,7 @@
 $marks = array(
   array(
     'host' => 'https://cryptofeed.ru',
+    'name' => 'CryptoFeed',
     'item' => '.ex2-content',
     'title' => '.article-title a',
     'link' => '.article-title a',
@@ -13,6 +14,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://bitok.blog',
+    'name' => 'Биток Блог',
     'item' => '.feed__item',
     'title' => '.b-article h2 span',
     'link' => '.entry_content--short a',
@@ -24,6 +26,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://www.rbc.ru/crypto/',
+    'name' => 'РБК',
     'item' => '.item',
     'title' => '.item__title',
     'link' => '.item__link',
@@ -35,6 +38,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://bloomchain.ru/blockchain-fintech/',
+    'name' => 'Bloomchain',
     'item' => '.td-block-span4',
     'title' => '.entry-title a',
     'link' => '.entry-title a',
@@ -46,6 +50,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://www.vedomosti.ru',
+    'name' => 'Ведомости',
     'item' => '.b-news__item',
     'title' => '.b-news__item__title a',
     'link' => '.b-news__item__title a',
@@ -57,6 +62,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://www.vesti.ru',
+    'name' => 'Вести',
     'item' => '.news-wrapper .b-item',
     'title' => '.b-item__title a',
     'link' => '.b-item__title a',
@@ -68,6 +74,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://www.vesti.ru',
+    'name' => 'Вести',
     'item' => '.short-news__item',
     'title' => '.short-news__item__title a',
     'link' => '.short-news__item__title a',
@@ -79,6 +86,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://kp.ru',
+    'name' => 'Комсомольская правда',
     'item' => '.articles .digest',
     'title' => '.digestTitle',
     'link' => 'a',
@@ -90,6 +98,7 @@ $marks = array(
   ),
   array(
     'host' => 'https://ria.ru',
+    'name' => 'РИА Новости',
     'item' => '.floor__cell-shape',
     'title' => '.cell-main-photo__title',
     'link' => '.share',

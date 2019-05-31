@@ -76,7 +76,7 @@ function downloadFile ($URL, $PATH) {
     }
 }
 
-function ShowMessage($text, $type) {
+function ShowMessage($text, $type = 'error') {
   echo '<script>alert("' . $text . '")</script>';
 }
 
@@ -86,4 +86,9 @@ function DeleteEndings($word) {
     return $word;
 }
 
+function PrintArray($array) {
+  echo '<pre>';
+  print_r($array);
+  echo '</pre>';
+}
 ?>

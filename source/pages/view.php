@@ -58,10 +58,10 @@ if(isset($_GET['id'])) {
                           echo '<input type="text" name="name" value="' . $userlogin . '" readonly maxlength="30">';
                         } else {
                           echo '<input name="auth" type="hidden" value="0">';
-                          echo '<input required type="text" name="name" placeholder="Ваше имя" title="Введите Ваше имя" maxlength="30">';
+                          echo '<input required type="text" name="name" placeholder="Ваше имя" title="Введите Ваше имя" minlength="2" maxlength="30">';
                         }
                         ?>
-              					<textarea required name="message" id="cmtx_comment" placeholder="Ваш комментарий .." title="Введите свой комментарий" maxlength="1000"></textarea>
+              					<textarea required name="message" id="cmtx_comment" placeholder="Ваш комментарий .." title="Введите свой комментарий" minlength="10" maxlength="1000"></textarea>
               				</div>
                         <input type="hidden" name="page_id" value="<?php echo $news_id ?>" />
                         <input type="submit" class="btn-blue" value="Добавить комментарий">
@@ -84,9 +84,9 @@ echo $date;
       // Это коммент от авторизованного пользователя?
       if ($comment['auth'] == 1) {
         $comment_userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$comment_login.'"');
-        echo '<a class="comment_profile_link" href="/pages/cabinet/viewprofile.php?id=' . $comment_userID . ' ">' . $userlogin . '</a>';
+        echo '<a class="comment_profile_link" href="/pages/cabinet/viewprofile.php?id=' . $comment_userID . ' ">' . $comment_login . '</a>';
       } else {
-        echo $userlogin;
+        echo $comment_login;
       }
     ?></b> <span class="comm_time"><?php echo str_replace('-','.',$comment['date']) ?></span></div>
     <div class="comment_message_in"><?php echo $comment['message'] ?>

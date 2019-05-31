@@ -26,17 +26,22 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
 <div class="text">
   <h2>Блокчейн и криптовалюта:</h2>
   <ul>
-    <li><b>BitokBlog</b> - <a href="https://bitok.blog">bitok.blog</a></li>
-    <li><b>CryptoFeed</b> - <a href="https://cryptofeed.ru">cryptofeed.ru</a></li>
-    <li><b>РБК.Crypto</b>- <a href="https://www.rbc.ru/crypto/">rbc.ru/crypto/</a></li>
-    <li><b>BloomChain</b> - <a href="https://bloomchain.ru">bloomchain.ru</a></li>
+    <?php
+    $sql_sources = R::getAll("SELECT * FROM sources WHERE category = 'Блокчейн' GROUP BY name ORDER BY name DESC");
+    foreach ($sql_sources as $current_site) {
+      echo '<li><b>'.$current_site['name'].'</b> - <a href="'.$current_site['host'].'">'.$current_site['host'].'</a></li>';
+    }
+    ?>
   </ul>
 
   <h2>Общетематические новостные сайты:</h2>
   <ul>
-    <li><b>Комсомольская Правда</b> - <a href="kp.ru">kp.ru</a></li>
-    <li><b>Вести</b> - <a href="https://vesti.ru">vesti.ru</a></li>
-    <li><b>РИА Новости</b> - <a href="https://ria.ru">ria.ru</a></li>
+    <?php
+    $sql_sources = R::getAll("SELECT * FROM sources WHERE category = '' GROUP BY name ORDER BY name DESC");
+    foreach ($sql_sources as $current_site) {
+      echo '<li><b>'.$current_site['name'].'</b> - <a href="'.$current_site['host'].'">'.$current_site['host'].'</a></li>';
+    }
+    ?>
   </ul>
   <p>В данный момент список активно пополняется.</p>
 
