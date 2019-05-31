@@ -9,14 +9,14 @@ function getSourceInfo($source, $column) {
 }
 
 function outputLinksPost($id, $title, $source) {
-  echo '<li><a href="/pages/view.php?id='.$id.'">';
+  echo '<li id="'.$id.'"><a href="/pages/view.php?id='.$id.'">';
 	echo '<div class="source-icon"><img src="/images/icons/sites/16/'.GetRootUrl($source).'.ico"></div>';
   echo '    <div class="title">'.$title.'</div>';
   echo '  </a></li>';
 }
 
 function outputImagePost($id, $title, $image, $source) {
-  echo '<div class="cart">';
+  echo '<div class="cart" id="'.$id.'">';
   echo '<div class="cart-image">';
 
 	if(isset($image)) {

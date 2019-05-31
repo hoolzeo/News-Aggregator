@@ -6,9 +6,7 @@
   <div class="cabinet">
     <?php
       if ( isset ($_SESSION['logged_user']) ) {
-        // $userlogin = $_SESSION['logged_user']->login;
-        // echo $userlogin;
-        echo '<input type="submit" id="profile_view" value="Мой профиль">';
+        echo '<a href="/pages/cabinet/viewprofile.php?id=' . $userID . ' ">Мой профиль</a>';
         echo '<input type="submit" id="profile_exit" value="Выйти из аккаунта">';
       } else {
         echo 'Вы не авторизованы<br/>';

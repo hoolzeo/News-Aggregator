@@ -6,12 +6,6 @@ if ( isset($_GET['search_title']) || isset($_GET['search_text']) ) {
 
     $search_word = $_GET['words'];
 
-    // Обрезаем окончания у слов для более эффективного поиска
-    function DeleteEndings($word) {
-        $word = preg_replace("/("."ых|ый|ы|ой|ое|ые|ому|ом|ами|ам|ая|ат|ать|а|овый|ов|ого|ох|о|у|ему|ей|е|ство|ия|ий|и|ять|ь|я|он|ют|".")$/i", "", $word); //удаляем окончания
-        return $word;
-    }
-
     $search_word_full = $search_word;
 
     $search_word = DeleteEndings($search_word);
@@ -19,11 +13,20 @@ if ( isset($_GET['search_title']) || isset($_GET['search_text']) ) {
     $search_title = isset($_GET['search_title']);
     $search_text = isset($_GET['search_text']);
 
-    if (($search_title) and ($search_text)) {
-      $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" OR `text` LIKE "%'.$search_word.'%"';
-    } else {
-      if ($search_title) $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%"';
-      if ($search_text) $query_select = 'SELECT * FROM posts WHERE `text` LIKE "%'.$search_word.'%"';
+    if (($userlogin) and (!empty($stop_words))) {
+      if (($search_title) and ($search_text)) {
+        $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" OR `text` LIKE "%'.$search_word.'%"';
+      } else {
+        if ($search_title) $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" and `title` NOT LIKE "' . $stop_like . '"';
+        if ($search_text) $query_select = 'SELECT * FROM posts WHERE `text` LIKE "%'.$search_word.'%" and `title` NOT LIKE "' . $stop_like . '"';
+      }
+  } else {
+      if (($search_title) and ($search_text)) {
+        $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%" OR `text` LIKE "%'.$search_word.'%"';
+      } else {
+        if ($search_title) $query_select = 'SELECT * FROM posts WHERE `title` LIKE "%'.$search_word.'%"';
+        if ($search_text) $query_select = 'SELECT * FROM posts WHERE `text` LIKE "%'.$search_word.'%"';
+      }
     }
 
     $query = R::getAll($query_select);
@@ -71,6 +74,10 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
 
       </div>
 
+      <hr />
+      <?php
+      echo 'Найдено результатов: ' . count($query);
+      ?>
       <hr />
 
       <div class="news-list">

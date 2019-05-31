@@ -13,11 +13,23 @@ if(isset($_GET['page'])){
 }
 $startIndex = ($pageNum-1)*$countView; // с какой записи начать выборку
 
-// Получаем посты
-$sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE img != '' ORDER BY id DESC LIMIT $startIndex, $countView");
+if (($userlogin) and (!empty($stop_words_string))) {
+  $query_parts = array();
+  foreach ($stop_words as $val) {
+      $query_parts[] = "'%".$val."%'";
+  }
 
-// получение полного количества новостей
-$countAllNews = R::count( 'posts', "WHERE img != ''");
+  $AndStopNotLike = implode(' and title NOT LIKE ', $query_parts);
+
+  $sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE img != '' AND title NOT LIKE {$AndStopNotLike} ORDER BY id DESC LIMIT $startIndex, $countView");
+  $countAllNews = R::count( 'posts', "WHERE img != '' AND title NOT LIKE {$AndStopNotLike}");
+  $expressNews = R::getAll( "SELECT * FROM posts WHERE img IS NULL AND title NOT LIKE {$AndStopNotLike} ORDER BY id DESC LIMIT 5" );
+
+} else {
+  $sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE img != '' ORDER BY id DESC LIMIT $startIndex, $countView");
+  $countAllNews = R::count( 'posts', "WHERE img != ''");
+  $expressNews = R::getAll( 'SELECT * FROM posts WHERE img IS NULL ORDER BY id DESC LIMIT 5' );
+}
 
 // номер последней страницы
 $lastPage = ceil($countAllNews/$countView);
@@ -30,10 +42,6 @@ $lastPage = ceil($countAllNews/$countView);
 </head>
 <body>
   <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
-
-<?php
-
-?>
 
   <div class="wrapper container">
     <main>
@@ -51,12 +59,10 @@ $lastPage = ceil($countAllNews/$countView);
         <div class="block-title">Экспресс-новости</div>
         <ul>
           <?php
-            $query = R::getAll( 'SELECT * FROM posts WHERE img IS NULL ORDER BY id DESC LIMIT 5' );
-            foreach ($query as $post) { outputLinksPost( $post['id'], $post['title'], $post['link']); }
+            foreach ($expressNews as $post) { outputLinksPost( $post['id'], $post['title'], $post['link']); }
           ?>
         </ul>
       </div>
-
 
       <h1>Главные новости за сегодня</h1>
       <div class="news-list">
