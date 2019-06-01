@@ -11,23 +11,23 @@ var
 
 var path = {
   root: 'release/',
-	
-  build: { 
+
+  build: {
     php: 'release/',
     js: 'release/js/',
     css: 'release/css/',
     img: 'release/images',
     fonts: 'release/fonts/'
   },
-  src: { 
+  src: {
     php: 'source/**/*.php',
     js: 'source/js/**/*.js',
     css: 'source/css/**/*.css',
     less: 'source/less/**/*.less',
-    img: 'source/images/**/*', 
+    img: 'source/images/**/*',
     fonts: 'source/fonts/**/*.*'
   },
-  watch: { 
+  watch: {
     php: 'source/**/*.php',
     js: 'source/js/**/*.js',
     less: 'source/less/**/*.less',
@@ -68,8 +68,14 @@ function perenos() {
 	return gulp.src(path.src.fonts).pipe(gulp.dest(path.build.fonts));
 }
 
-let build = gulp.series(php, styles, js, images, perenos );
- 
+function createDirs() {
+  return gulp.src('*.*', {read: false})
+      .pipe(gulp.dest('./release/images/news'))
+      .pipe(gulp.dest('./release/images/sites/16'));
+}
+
+let build = gulp.series(createDirs, php, styles, js, images, perenos );
+
 gulp.task('build', build);
 
 gulp.task('default', gulp.series(build => {
