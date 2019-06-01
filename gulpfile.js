@@ -70,8 +70,8 @@ function perenos() {
 
 function createDirs() {
   return gulp.src('*.*', {read: false})
-      .pipe(gulp.dest('./release/images/news'))
-      .pipe(gulp.dest('./release/images/sites/16'));
+      .pipe(gulp.dest('release/images/news'))
+      .pipe(gulp.dest('release/images/sites/16'));
 }
 
 let build = gulp.series(createDirs, php, styles, js, images, perenos );
