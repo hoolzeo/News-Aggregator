@@ -15,11 +15,11 @@ if ( isset($data['do_login']) )
 			header('Location: /');
 		}else
 		{
-			ShowMessage('Неверно введен пароль!', 'error');
+			ShowMessage('Неверно введен пароль!');
 		}
 
 	} else {
-		ShowMessage('Пользователь с таким логином не найден!', 'error');
+		ShowMessage('Пользователь с таким логином не найден!');
 	}
 }
 ?>
@@ -56,8 +56,6 @@ if ( isset($data['do_login']) )
   </div>
 
   <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php'; ?>
-
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/chunks/auth.php'; ?>
 
 </body>
 

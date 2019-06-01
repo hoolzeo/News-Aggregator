@@ -37,7 +37,6 @@ function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, 
 
 foreach ($marks as $current_site) {
   $url = GetRootUrl($current_site['host']);
-  echo $url;
   MarksDB($current_site['host'], $url, $current_site['name'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category']);
 }
 ?>

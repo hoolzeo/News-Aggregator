@@ -6,9 +6,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 <html lang="ru">
 <head>
   <title>Админ-панель</title>
-  <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';
- ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php'; ?>
 </head>
 <body>
 
@@ -52,12 +50,6 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
 
       $("#DownloadImages" ).click(function() {
         $.post("functions/download_images.php", function(data){
-          $('#result').html(data);
-        });
-      });
-
-      $("#ParseIcons" ).click(function() {
-        $.post("functions/add_icons.php", function(data){
           $('#result').html(data);
         });
       });

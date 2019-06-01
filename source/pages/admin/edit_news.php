@@ -1,6 +1,5 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
-
 if(isset($_GET['id'])) {
   $news_id = $_GET['id'];
 
@@ -16,7 +15,6 @@ if(isset($_GET['id'])) {
     echo 'Данной новости не существует';
   }
 }
-
 if(isset($_POST['edit_button'])) {
   if($_POST['edd_title_post'])$edd_title_post = $_POST['edd_title_post'];
   if($_POST['edd_text_post'])$edd_text_post = $_POST['edd_text_post'];
@@ -25,7 +23,6 @@ if(isset($_POST['edit_button'])) {
   if($edd_title_post & $edd_text_post & $edd_id_post)
   {
     R::exec( 'UPDATE `posts` SET `title`="' . $edd_title_post . '", `text`="'.$edd_text_post.'" WHERE `id` = ' . $edd_id_post);
-    ShowMessage('Новость отредактирована!', 'good');
     header("Refresh:0; url=/pages/view.php?id=$id");
   } else {
     ShowMessage('Заполните все поля!', 'error');

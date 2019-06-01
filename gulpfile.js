@@ -65,16 +65,17 @@ function images() {
 
 function perenos() {
     gulp.src(['source/favicon.ico']).pipe(gulp.dest(path.root));
+    gulp.src(['source/.htaccess']).pipe(gulp.dest(path.root));
 	return gulp.src(path.src.fonts).pipe(gulp.dest(path.build.fonts));
 }
 
 function createDirs() {
   return gulp.src('*.*', {read: false})
       .pipe(gulp.dest('release/images/news'))
-      .pipe(gulp.dest('release/images/sites/16'));
+      .pipe(gulp.dest('release/images/icons/sites/16'));
 }
 
-let build = gulp.series(createDirs, php, styles, js, images, perenos );
+let build = gulp.series(createDirs, php, styles, js, images, perenos);
 
 gulp.task('build', build);
 
