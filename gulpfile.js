@@ -9,47 +9,38 @@ var
   concat = require('gulp-concat'),
   autoprefixer = require('gulp-autoprefixer');
 
-var config = {
-  server: {
-    baseDir: "./release",
-    proxy: 'newz.ru'
-  },
-  tunnel: false,
-  host: 'localhost',
-  port: 9000,
-  logPrefix: "Frontend_Devil"
-};
-
 var path = {
-  build: { //Тут мы укажем куда складывать готовые после сборки файлы
+  root: 'release/',
+	
+  build: { 
     php: 'release/',
     js: 'release/js/',
     css: 'release/css/',
-    img: 'release/img/',
+    img: 'release/images',
     fonts: 'release/fonts/'
   },
-  src: { //Пути откуда брать исходники
+  src: { 
     php: 'source/**/*.php',
-    js: 'source/js/**/*.js',//В стилях и скриптах нам понадобятся только main файлы
-    style: 'source/css/**/*.css',
+    js: 'source/js/**/*.js',
+    css: 'source/css/**/*.css',
     less: 'source/less/**/*.less',
-    img: 'source/img/**/*.*', //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
+    img: 'source/images/**/*', 
     fonts: 'source/fonts/**/*.*'
   },
-  watch: { //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
+  watch: { 
     php: 'source/**/*.php',
     js: 'source/js/**/*.js',
     less: 'source/less/**/*.less',
-    style: 'source/css/**/*.css'
+    css: 'source/css/**/*.css'
   },
   clean: './release'
 };
 
-gulp.task('style:build', function () {
-  gulp.src(['./source/css/**/*.css'])
-  .pipe(gulp.dest('release/css'));
+function styles() {
+gulp.src(path.src.css)
+  .pipe(gulp.dest(path.build.css));
 
-  gulp.src(['./source/less/**/*.less'])
+  return gulp.src(path.src.less)
       .pipe(concat('main.css'))
       .pipe(less())
       .pipe(autoprefixer({
@@ -57,63 +48,32 @@ gulp.task('style:build', function () {
             cascade: false
         }))
       .pipe(cssmin())
-      .pipe(gulp.dest('release/css'));
-});
+      .pipe(gulp.dest(path.build.css));
+}
 
-gulp.task('php:build', function () {
-    gulp.src([path.src.php])
-        .pipe(gulp.dest(path.build.php));
-});
+function php() {
+	return gulp.src([path.src.php]).pipe(gulp.dest(path.build.php));
+}
 
-gulp.task('js:build', function () {
-    gulp.src(path.src.js) //Найдем наш main файл
-        .pipe(gulp.dest(path.build.js)); //И перезагрузим сервер
-});
+function js() {
+	return gulp.src(path.src.js).pipe(gulp.dest(path.build.js));
+}
 
-gulp.task('other:build', function() {
-    gulp.src(path.src.fonts).pipe(gulp.dest(path.build.fonts));
-    gulp.src(['source/favicon.ico']).pipe(gulp.dest('release/'));
-    gulp.src(['source/images/**/*']).pipe(gulp.dest('release/images'));
-});
+function images() {
+	return gulp.src(path.src.img).pipe(gulp.dest(path.build.img));
+}
 
-gulp.task('fonts:build', function() {
-    gulp.src(path.src.fonts)
-        .pipe(gulp.dest(path.build.fonts))
-});
+function perenos() {
+    gulp.src(['source/favicon.ico']).pipe(gulp.dest(path.root));
+	return gulp.src(path.src.fonts).pipe(gulp.dest(path.build.fonts));
+}
 
-gulp.task('build', [
-    'js:build',
-    'style:build',
-    'php:build',
-    'other:build',
-    'fonts:build'
-]);
+let build = gulp.series(php, styles, js, images, perenos );
+ 
+gulp.task('build', build);
 
-gulp.task('clean', function () {
-    return gulp.src('release', {read: false})
-        .pipe(clean());
-});
-
-gulp.task('watch', function(){
-    watch([path.watch.php], function(event, cb) {
-      gulp.start('php:build');
-    });
-
-    watch([path.watch.js], function(event, cb) {
-        gulp.start('js:build');
-    });
-
-    watch([path.watch.less], function(event, cb) {
-        gulp.start('style:build');
-    });
-
-    watch([path.watch.style], function(event, cb) {
-        gulp.start('style:build');
-    });
-});
-
-gulp.task('default', ['build', 'watch']);
-
-gulp.task('webserver', function () {
-  browserSync(config);
-});
+gulp.task('default', gulp.series(build => {
+  gulp.watch(path.watch.php, gulp.series(php));
+  gulp.watch(path.watch.js, gulp.series(js));
+  gulp.watch([path.watch.less, path.watch.css], gulp.series(styles));
+}));
