@@ -34,6 +34,8 @@ foreach ($query as $post) {
     // Скачиваем изображение
     downloadFile($img_url, $img_filepath);
 
+    echo '<b>Добавлено изображение:</b> ' . $img_filename . '<br>';
+
     // Заносим в БД название изображения
     $cat = R::load('posts', $id);
     $cat->img_local = $img_filename;
