@@ -1,17 +1,13 @@
 var
   gulp = require('gulp'),
   watch = require('gulp-watch'),
-  prefixer = require('gulp-autoprefixer'),
-  uglify = require('gulp-uglify'),
   cssmin = require('gulp-minify-css'),
-  browserSync = require("browser-sync"),
+  //browserSync = require("browser-sync"),
   clean = require('gulp-clean'),
   less = require('gulp-less'),
   path = require('path'),
   concat = require('gulp-concat'),
-  uncss = require('gulp-uncss'),
   autoprefixer = require('gulp-autoprefixer');
-  reload = browserSync.reload;
 
 var config = {
   server: {
@@ -61,8 +57,7 @@ gulp.task('style:build', function () {
             cascade: false
         }))
       .pipe(cssmin())
-      .pipe(gulp.dest('release/css'))
-      .pipe(reload({stream: true}));
+      .pipe(gulp.dest('release/css'));
 });
 
 gulp.task('php:build', function () {
@@ -72,8 +67,7 @@ gulp.task('php:build', function () {
 
 gulp.task('js:build', function () {
     gulp.src(path.src.js) //Найдем наш main файл
-        .pipe(gulp.dest(path.build.js)) //Выплюнем готовый файл в build
-        .pipe(reload({stream: true})); //И перезагрузим сервер
+        .pipe(gulp.dest(path.build.js)); //И перезагрузим сервер
 });
 
 gulp.task('other:build', function() {
@@ -118,7 +112,7 @@ gulp.task('watch', function(){
     });
 });
 
-gulp.task('default', ['build', 'webserver', 'watch']);
+gulp.task('default', ['build', 'watch']);
 
 gulp.task('webserver', function () {
   browserSync(config);

@@ -8,31 +8,48 @@ require $_SERVER['DOCUMENT_ROOT'].'/pages/admin/functions/site_parse.php';
 <head>
   <title>Список новостей</title>
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';
  ?>
 </head>
 <body>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
  ?>
 
   <div class="wrapper container">
     <main>
       <h1>Добавление новостей</h1>
       <hr>
-      <form method="post">
+      <form id="list_sources" method="post">
       <?php
       $sql_sources = R::getAll("SELECT * FROM sources GROUP BY name");
       foreach ($sql_sources as $current_site) {
       	echo '<input type="checkbox" name="source[]" value="'.$current_site['url'].'" /> '.$current_site['url'].'<br />';
       }
       ?>
+
+      <div class="group-buttons">
+        <input type="submit" id="select_all" value="Выделить все" />
+        <input type="submit" id="unselect_all" value="Снять все" />
+      </div>
+
       <input type="submit" name="GoParseNews" value="Добавить" />
-      <input type="reset" value="Снять все отметки" />
+
       </form>
 
-      <br><hr>
+      <script type="text/javascript">
+      $(function() {
+        $('#select_all').click(function(e) {
+          e.preventDefault();
+          $("#list_sources input[type='checkbox']").attr( "checked" , true );
+        });
+        $('#unselect_all').click(function(e) {
+          e.preventDefault();
+          $("#list_sources input[type='checkbox']").attr( "checked" , false );
+        });
+      });
+      </script>
 
       <?php
       // Получаем выделенные чекбоксы и парсим эти сайты
@@ -58,13 +75,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
     </main>
 
     <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php';
  ?>
 
   </div>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php';
  ?>
 
   <?php

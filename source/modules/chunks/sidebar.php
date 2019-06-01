@@ -1,5 +1,5 @@
 <aside>
-  <div class="night-theme">
+  <div class="night-theme upgrade-checkbox">
     Ночная тема <input type="checkbox" id="nightTheme">
   </div>
 
@@ -37,7 +37,7 @@
 $(function() {
   $( ".tags div" ).click(function() {
     var searchWord = $(this).html();
-    window.location.href = "http://localhost/pages/search.php?words=" + searchWord + "&search_title=on&search_text=on";
+    window.location.href = "/pages/search.php?words=" + searchWord + "&search_title=on&search_text=on";
   });
 });
 </script>

@@ -62,12 +62,12 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
 
       <div class="checkbox-block">
         <div class="checkbox-title">Искать в заголовках</div>
-        <div class="checkbox-div"><input type="checkbox" name="search_title" id="search_title" <?php if (($search_title) or (!$search_word)) echo 'checked' ?>></div>
+        <div class="checkbox-div upgrade-checkbox"><input type="checkbox" name="search_title" id="search_title" <?php if (($search_title) or (!$search_word)) echo 'checked' ?>></div>
       </div>
 
       <div class="checkbox-block">
         <div class="checkbox-title">Искать в тексте новости</div>
-        <div class="checkbox_div"><input type="checkbox" name="search_text" id="search_text" <?php if ($search_text) echo 'checked' ?>></div>
+        <div class="checkbox_div upgrade-checkbox"><input type="checkbox" name="search_text" id="search_text" <?php if ($search_text) echo 'checked' ?>></div>
       </div>
 
       </form>

@@ -1,8 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
-?>
 
-<?php
 $countView = 25; // количество материалов на странице
 
 // номер страницы
@@ -28,13 +26,13 @@ $lastPage = ceil($countAllNews/$countView);
 <head>
   <title>Список пользователей</title>
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';
  ?>
 </head>
 <body>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
  ?>
 
   <div class="wrapper container">
@@ -59,7 +57,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
           echo <<<END
           <tr id="$id">
             <td class="list_id">$id</td>
-            <td class="list_name"><a href="http://localhost/pages/cabinet/viewprofile.php?id=$id" target="_blank">$login</a></td>
+            <td class="list_name"><a href="/pages/cabinet/viewprofile.php?id=$id" target="_blank">$login</a></td>
             <td class="list_count_comms">$num_comms</td>
             <td class="list_actions">
               <div class="edit" title="Редактировать"><i class="fa fa-cog"></i></div>
@@ -75,7 +73,7 @@ END;
       // Обработчик кнопки "Редактировать"
       $('.edit').click(function() {
           var newsID = $(this).parent().parent().attr('id');
-          window.location.href = "http://localhost/pages/admin/edit_news.php?id=" + newsID;
+          window.location.href = "/pages/admin/edit_news.php?id=" + newsID;
       });
 
       // Обработчик кнопки "Удалить"
@@ -113,13 +111,13 @@ END;
     </main>
 
     <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php';
  ?>
 
   </div>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php';
  ?>
 
   <?php

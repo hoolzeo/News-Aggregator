@@ -7,13 +7,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 <head>
   <title>Админ-панель</title>
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';
  ?>
 </head>
 <body>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
  ?>
 
   <div class="wrapper container">
@@ -29,16 +29,16 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
 
       <hr>
 
-      <h2>Работа с новостями</h2>
+      <h2>Источники новостей</h2>
       <button id="CreateSources">Создать базу источников</button>
-      <button id="ParsePosts">Добавить новости</button>
-      <button id="ParseIcons">Собрать иконки сайтов</button>
-      <button id="DownloadImages">Скачать изображения новостей</button>
+      <button id="WipeSources">Очистить базу источников</button>
+
 
       <br><br><hr>
 
-      <h2>Очистка</h2>
-      <button id="WipeSources">Очистить базу источников</button>
+      <h2>Новости</h2>
+      <button id="ParsePosts">Добавить новости</button>
+      <button id="DownloadImages">Скачать изображения новостей</button>
       <button id="WipePosts">Очистить базу постов</button>
 
       <div id="result"></div>
@@ -63,9 +63,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
       });
 
       $("#ParsePosts" ).click(function() {
-        $.post("functions/add_posts.php", function(data){
-          $('#result').html(data);
-        });
+        window.location.href = "/pages/admin/add_posts.php";
       });
 
       $("#WipeSources" ).click(function() {
@@ -87,13 +85,13 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
     </main>
 
     <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php';
  ?>
 
   </div>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php';
  ?>
 
   <?php

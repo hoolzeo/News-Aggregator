@@ -1,8 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
-?>
 
-<?php
 if(isset($_GET['id'])) {
   $news_id = $_GET['id'];
 
@@ -41,13 +39,13 @@ if(isset($_POST['edit_button'])) {
 <head>
   <title>Список новостей</title>
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';
  ?>
 </head>
 <body>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
  ?>
 
   <div class="wrapper container">
@@ -70,13 +68,13 @@ END;
     </main>
 
     <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php';
  ?>
 
   </div>
 
   <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php';
  ?>
 
   <?php

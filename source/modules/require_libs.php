@@ -1,6 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
-require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/templates.php';
+
+mb_internal_encoding("UTF-8");
 
 // Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {

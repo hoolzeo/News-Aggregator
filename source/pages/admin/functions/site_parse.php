@@ -103,13 +103,13 @@ function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text,
           echo '<br /><b>Опубликована новость:</b> ' . $title . '<br />';
 
 					// Записываем информацию о превьюшках в базу данных
-					$user = R::dispense('posts');
-					if (!empty($link)) $user->link = $link;
-					if (!empty($img)) $user->img = $img;
-					if (!empty($title)) $user->title = $title;
-					if (!empty($article_text)) $user->text = strip_tags($article_text, '<p>');;
-          if (!empty($category)) $post->category = $category;
-					R::store($user);
+					$posts = R::dispense('posts');
+					if (!empty($link)) $posts->link = $link;
+					if (!empty($img)) $posts->img = $img;
+					if (!empty($title)) $posts->title = $title;
+					if (!empty($article_text)) $posts->text = strip_tags($article_text, '<p>');;
+          if (!empty($category)) $posts->category = $category;
+					R::store($posts);
         }
 			}
 		}

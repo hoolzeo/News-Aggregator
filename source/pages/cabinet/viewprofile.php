@@ -30,12 +30,12 @@ if (isset($_POST['StopWords_btn'])) {
 <html lang="ru">
 <head>
   <title><?php echo $login ?></title>
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/meta.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php'; ?>
 </head>
 <body>
 
   <?php
-  require $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
+  require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php'; ?>
 
   <div class="wrapper container">
     <main id="page_viewprofile">
@@ -64,6 +64,7 @@ END;
 ?>
 
       <br><hr>
+      <li><a href="/pages/admin/index.php">Админ-панель</a></li>
 
       <h2>Комментарии пользователя</h2>
       <?php
@@ -79,11 +80,11 @@ END;
 
     </main>
 
-    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/sidebar.php'; ?>
+    <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/sidebar.php'; ?>
 
   </div>
 
-  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/footer.php'; ?>
+  <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/footer.php'; ?>
 
   <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/stuff/auth.php'; ?>
 
