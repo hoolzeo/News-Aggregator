@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-release/
+release/images/news/*
 
 
 # misc
@@ -16,6 +16,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
 *.7z
-*.jpg
