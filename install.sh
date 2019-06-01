@@ -7,6 +7,10 @@
 # Установка Node Js (npm)
 # apt install nodejs
 
+# Если не работает установщик:
+# aptitude install dos2unix
+# dos2unix script.sh
+
 # Установка Gulp и пакетов в проект
 npm install gulp
 npm install gulp
