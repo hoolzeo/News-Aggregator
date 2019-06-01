@@ -102,6 +102,11 @@ function SiteParse($host, $item, $prev_title, $prev_link, $prev_img, $post_text,
 
           echo '<br /><b>Опубликована новость:</b> ' . $title . '<br />';
 
+					// Фиксим протокол
+					if (substr($img, 0, 2) == '//') {
+						$img = str_replace('//', 'http://', $img);
+					}
+
 					// Записываем информацию о превьюшках в базу данных
 					$posts = R::dispense('posts');
 					if (!empty($link)) $posts->link = $link;
