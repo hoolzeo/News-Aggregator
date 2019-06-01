@@ -85,6 +85,5 @@ gulp.task('build', build);
 gulp.task('default', gulp.series(build => {
   gulp.watch(path.watch.php, gulp.series(php));
   gulp.watch(path.watch.js, gulp.series(js));
-  gulp.watch(path.watch.images, gulp.series(images));
   gulp.watch([path.watch.less, path.watch.css], gulp.series(styles));
 }));
