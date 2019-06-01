@@ -7,7 +7,9 @@ var
   less = require('gulp-less'),
   path = require('path'),
   concat = require('gulp-concat'),
-  autoprefixer = require('gulp-autoprefixer');
+  autoprefixer = require('gulp-autoprefixer'),
+  concat = require('gulp-concat'),
+  imagemin = require('gulp-imagemin');
 
 var path = {
   root: 'release/',
@@ -60,7 +62,8 @@ function js() {
 }
 
 function images() {
-	return gulp.src(path.src.img).pipe(gulp.dest(path.build.img));
+  gulp.src('release/images/**/*.*').pipe(imagemin()).pipe(gulp.dest('release/images'));
+  return gulp.src(path.src.img).pipe(imagemin()).pipe(gulp.dest(path.build.img));
 }
 
 function perenos() {
@@ -82,5 +85,6 @@ gulp.task('build', build);
 gulp.task('default', gulp.series(build => {
   gulp.watch(path.watch.php, gulp.series(php));
   gulp.watch(path.watch.js, gulp.series(js));
+  gulp.watch(path.watch.images, gulp.series(images));
   gulp.watch([path.watch.less, path.watch.css], gulp.series(styles));
 }));
