@@ -9,7 +9,8 @@ if (isset($_POST['table'])) {
     echo 'База источников удалена!';
   } elseif ($table == 'posts') {
     R::wipe('posts');
-    echo 'База постов удалена!';
+    R::wipe('comments');
+    echo 'База постов с комментариями удалена!';
   }
 }
 
