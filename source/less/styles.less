@@ -1,10 +1,7 @@
-@color-main: #1e63e6;
-@color-body: #f6f6f6;
-@color-one: #fff;
-@color-text: #222;
 @shadow-block: 0 0 7px rgba(0,0,0,.08);
-
 @checkbox-size: 20px;
+
+@import "colors.less";
 
 * {
   box-sizing: border-box;
@@ -130,7 +127,7 @@ h1 {
 }
 
 .news-list2 {
-  background: #f7f7f7;
+  background: @color-body;
   margin-top: 10px;
   margin-bottom: 20px;
   padding: 12px 15px;
@@ -313,4 +310,18 @@ input:checked[type="checkbox"] {
 .pagination-sm > li:last-child > span {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  background: white;
+  border: 1px solid fade(#000, 20%);
+  font-size: 14px;
+  color: black;
+  padding: 2px 5px;
+  margin: 5px;
+}
+
+.input-block {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

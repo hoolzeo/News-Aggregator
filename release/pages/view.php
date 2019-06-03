@@ -42,7 +42,6 @@ if(isset($_GET['id'])) {
 <div class="post-image"> <img src="<?php echo $image ?>"> </div>
 <?php } ?>
 
-
 <div class="text"><?php echo $text ?></div>
 
 <div class="comments">

@@ -42,7 +42,17 @@ function styles() {
 gulp.src(path.src.css)
   .pipe(gulp.dest(path.build.css));
 
-  return gulp.src(path.src.less)
+  gulp.src(['source/less/**/*.less', '!source/less/colors.less'])
+      .pipe(concat('main_night.css'))
+      .pipe(less())
+      .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+      .pipe(cssmin())
+      .pipe(gulp.dest(path.build.css));
+
+  return gulp.src(['source/less/**/*.less', '!source/less/stuff/night_theme.less'])
       .pipe(concat('main.css'))
       .pipe(less())
       .pipe(autoprefixer({

@@ -1,6 +1,6 @@
 <aside>
   <div class="night-theme upgrade-checkbox">
-    Ночная тема <input type="checkbox" id="nightTheme">
+    Ночная тема <input type="checkbox" id="nightTheme" <?php if ((isset($_COOKIE['night_theme'])) && ($_COOKIE["night_theme"] == 'yes')) echo "checked"; ?>>
   </div>
 
   <div class="cabinet">
@@ -9,7 +9,6 @@
         echo '<a href="/pages/cabinet/viewprofile.php?id=' . $userID . ' ">Мой профиль</a>';
         echo '<a href="/pages/cabinet/logout.php">Выйти</a>';
       } else {
-        echo 'Вы не авторизованы<br/>';
         echo '<a href="/pages/cabinet/login.php">Авторизация</a>';
         echo '<a href="/pages/cabinet/signup.php">Регистрация</a>';
       }
@@ -38,6 +37,16 @@ $(function() {
   $( ".tags div" ).click(function() {
     var searchWord = $(this).html();
     window.location.href = "/pages/search.php?words=" + searchWord + "&search_title=on&search_text=on";
+  });
+
+  $( "#nightTheme" ).click(function() {
+    if ($('#nightTheme').is(':checked')){
+        $("#main_css").attr("href", "/css/main_night.css");
+        $.post("/test.php", { NightCheckBox: "yes" } );
+    } else {
+        $("#main_css").attr("href", "/css/main.css");
+        $.post("/test.php", { NightCheckBox: "no" } );
+    }
   });
 });
 </script>

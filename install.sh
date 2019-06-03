@@ -13,7 +13,6 @@
 
 # Установка Gulp и пакетов в проект
 npm install gulp
-npm install gulp
 npm install gulp-watch --save-dev
 npm install gulp-minify-css --save-dev
 npm install gulp-clean --save-dev
@@ -21,3 +20,4 @@ npm install gulp-less --save-dev
 npm install path --save-dev
 npm install gulp-concat --save-dev
 npm install gulp-autoprefixer --save-dev
+npm install gulp-imagemin --save-dev

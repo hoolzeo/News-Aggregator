@@ -95,15 +95,11 @@ $lastPage = ceil($countAllNews/$countView);
       <ul class="pagination">
           <?php if($pageNum > 1) { ?>
               <li><a href="/index.php?page=1">&lt;&lt;</a></li>
-              <li><a href="/index.php?page=<?=$pageNum-1;?>">&lt;</a></li>
-          <?php } ?>
-
-          <?php for($i = 1; $i<=$lastPage; $i++) { ?>
-              <li <?=($i == $pageNum) ? 'class="active"' : '';?>> <a href="/index.php?page=<?=$i;?>"><?=$i;?></a> </li>
+              <li><a href="/index.php?page=<?=$pageNum-1;?>">Назад</a></li>
           <?php } ?>
 
           <?php if($pageNum < $lastPage) { ?>
-              <li><a href="/index.php?page=<?=$pageNum+1;?>">&gt;</a></li>
+              <li><a href="/index.php?page=<?=$pageNum+1;?>">Вперёд</a></li>
               <li><a href="/index.php?page=<?=$lastPage;?>">&gt;&gt;</a></li>
           <?php } ?>
       </ul>
