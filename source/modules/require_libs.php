@@ -12,11 +12,12 @@ if ((!isset($_COOKIE['allow_sources'])) or (count(unserialize($_COOKIE['allow_so
   $emptyCookie = true;
 }
 
+
+
 // Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {
   $userlogin = $_SESSION['logged_user']->login;
-  $userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$userlogin.'"');
-
+  $userID = R::findOne('users', 'login = ?', [$userlogin])['id'];
   $getStopWords = R::getAll( 'SELECT `stop_words` FROM `users` WHERE `login` = "'.$userlogin.'" LIMIT 1' );
   $stop_words_string = $getStopWords[0]['stop_words'];
 

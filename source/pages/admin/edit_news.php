@@ -1,5 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
+
 if(isset($_GET['id'])) {
   $news_id = $_GET['id'];
 

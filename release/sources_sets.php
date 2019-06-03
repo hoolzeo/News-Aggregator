@@ -17,7 +17,7 @@ if (isset($_POST['SaveListSources'])) {
 <html lang="ru">
 <head>
 
-  <title>Список источников новостей</title>
+  <title>Фильтр ленты</title>
 
   <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/meta.php';

@@ -88,7 +88,7 @@ echo $date;
 
       // Это коммент от авторизованного пользователя?
       if ($comment['auth'] == 1) {
-        $comment_userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$comment_login.'"');
+        $comment_userID = R::findOne('users', 'login = ?', [$comment_login])['id'];
         echo '<a class="comment_profile_link" href="/pages/cabinet/viewprofile.php?id=' . $comment_userID . ' ">' . $comment_login . '</a>';
       } else {
         echo $comment_login;

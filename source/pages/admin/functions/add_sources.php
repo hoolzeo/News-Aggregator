@@ -1,6 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/source_marks.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
 
 //R::wipe('sources');
 
