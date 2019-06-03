@@ -13,6 +13,8 @@ if(isset($_GET['id'])) {
       $image = $post['img'];
       $text = $post['text'];
       $link = $post['link'];
+      $source = getSourceInfo($link, 'name');
+      $date = $post['date'];
     }
   } else {
     header( "HTTP/1.1 404 Not Found" );
@@ -37,7 +39,12 @@ if(isset($_GET['id'])) {
     <main id="page_post">
 
 <h1><?php echo $title ?></h1>
-<div class="estimated-time"> <i class="fa fa-clock-o"></i> <?php echo "Приблизительное время чтения: " . read_time_estimate($text);?> </div>
+
+<div class="post-icons">
+  <div class="post-icon post-icons__date"> <i class="fa fa-calendar"></i> <?php echo date("d.m.Y", strtotime($date)); ?></div>
+  <div class="post-icon post-icons__source"> <i class="fa fa-newspaper-o"></i><?php echo '<a href="'.$link.'" target="_blank">'.$source.'</a>'; ?></div>
+  <div class="post-icon post-icons__time"> <i class="fa fa-clock-o"></i> Приблизительное время чтения: <?php echo read_time_estimate($text);?> </div>
+</div>
 
 <?php if(!empty($image)) { ?>
 <div class="post-image"> <img src="<?php echo $image ?>"> </div>
@@ -45,7 +52,6 @@ if(isset($_GET['id'])) {
 
 <div class="text"><?php
 echo $text;
-echo '<a href="'.$link.'" target="_blank">Ссылка на источник статьи</a>';
 ?>
 
 </div>
@@ -74,8 +80,6 @@ echo '<a href="'.$link.'" target="_blank">Ссылка на источник с�
               		</div>
 
 <?php
-
-echo $date;
 
   $page_id = $news_id;// Уникальный идентификатор страницы (статьи или поста)
 
