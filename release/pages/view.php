@@ -12,6 +12,7 @@ if(isset($_GET['id'])) {
       $title = $post['title'];
       $image = $post['img'];
       $text = $post['text'];
+      $link = $post['link'];
     }
   } else {
     header( "HTTP/1.1 404 Not Found" );
@@ -42,7 +43,12 @@ if(isset($_GET['id'])) {
 <div class="post-image"> <img src="<?php echo $image ?>"> </div>
 <?php } ?>
 
-<div class="text"><?php echo $text ?></div>
+<div class="text"><?php
+echo $text;
+echo '<a href="'.$link.'" target="_blank">Ссылка на источник статьи</a>';
+?>
+
+</div>
 
 <div class="comments">
 

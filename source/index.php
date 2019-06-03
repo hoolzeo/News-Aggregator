@@ -13,23 +13,27 @@ if(isset($_GET['page'])){
 }
 $startIndex = ($pageNum-1)*$countView; // с какой записи начать выборку
 
+// Стоп-слова для авторизованных пользователей
 if (($userlogin) and (!empty($stop_words_string))) {
   $query_parts = array();
-  foreach ($stop_words as $val) {
-      $query_parts[] = "'%".$val."%'";
-  }
-
+  foreach ($stop_words as $val) $query_parts[] = "'%".trim($val)."%'";
   $AndStopNotLike = implode(' and title NOT LIKE ', $query_parts);
-
-  $sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE img != '' AND title NOT LIKE {$AndStopNotLike} ORDER BY id DESC LIMIT $startIndex, $countView");
-  $countAllNews = R::count( 'posts', "WHERE img != '' AND title NOT LIKE {$AndStopNotLike}");
-  $expressNews = R::getAll( "SELECT * FROM posts WHERE img IS NULL AND title NOT LIKE {$AndStopNotLike} ORDER BY id DESC LIMIT 5" );
-
-} else {
-  $sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE img != '' ORDER BY id DESC LIMIT $startIndex, $countView");
-  $countAllNews = R::count( 'posts', "WHERE img != ''");
-  $expressNews = R::getAll( 'SELECT * FROM posts WHERE img IS NULL ORDER BY id DESC LIMIT 5' );
+  $filter_stopwords = "and (title NOT LIKE {$AndStopNotLike})";
 }
+
+// Формируем ленту
+$sql_sources = unserialize($_COOKIE['allow_sources']);
+$tmpArray = [];
+foreach ($sql_sources as $current_site) array_push($tmpArray, "'%".$current_site."%'");
+$AndSourceLike = implode(' or link LIKE ', $tmpArray);
+$filter_link = "link LIKE {$AndSourceLike}";
+
+$zapros = "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` WHERE id IN (SELECT id FROM posts WHERE {$filter_link}) {$filter_stopwords} and `img` IS NOT NULL ORDER BY id DESC LIMIT $startIndex, $countView";
+
+$sql = R::getAll($zapros);
+
+$countAllNews = R::count( 'posts', "WHERE id IN (SELECT id FROM posts WHERE {$filter_link}) {$filter_stopwords} and `img` IS NOT NULL");
+$expressNews = R::getAll( "SELECT * FROM posts WHERE id IN (SELECT id FROM posts WHERE {$filter_link}) {$filter_stopwords} and `img` IS NULL ORDER BY id DESC LIMIT 5" );
 
 // номер последней страницы
 $lastPage = ceil($countAllNews/$countView);

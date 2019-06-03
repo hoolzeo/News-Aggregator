@@ -3,6 +3,15 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
 mb_internal_encoding("UTF-8");
 
+// Если куков нет - добавляем все источники в куки
+if ((!isset($_COOKIE['allow_sources'])) or (count(unserialize($_COOKIE['allow_sources'])) == 0)) {
+  $ArrayUserSources = [];
+  $sql_sources = R::getAll("SELECT * FROM sources GROUP BY name");
+  foreach ($sql_sources as $current_site) array_push ($ArrayUserSources, $current_site['url']);
+  Setcookie("allow_sources", serialize($ArrayUserSources));
+  $emptyCookie = true;
+}
+
 // Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {
   $userlogin = $_SESSION['logged_user']->login;
