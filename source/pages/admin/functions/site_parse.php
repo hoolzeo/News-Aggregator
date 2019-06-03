@@ -16,9 +16,39 @@ function GetOpenGraphImage($page) {
   return $meta_val;
 }
 
-function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode, $post_image = null, $category = null, $parent_elem = null)
+function GetJsonDate($html) {
+  $dom = new DOMDocument();
+  libxml_use_internal_errors( 1 );
+  $dom->loadHTML( $html );
+  $xpath = new DOMXpath( $dom );
+
+  $script = $dom->getElementsByTagName( 'script' );
+  $script = $xpath->query( '//script[@type="application/ld+json"]' );
+  $json = $script->item(0)->nodeValue;
+
+  $jsonArr = json_decode($json);
+  $date = $jsonArr->datePublished;
+  return $date;
+}
+
+function isUnix($timestamp)
 {
+    return ((string) (int) $timestamp === $timestamp) && ($timestamp <= PHP_INT_MAX) && ($timestamp >= ~PHP_INT_MAX);
+}
+
+function formatDate($date) {
+  if (isUnix($date)) {
+    return gmdate("Y-m-d", $date);
+  } else {
+    return date("Y-m-d", strtotime($date));
+  }
+}
+
+function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode, $post_image = null, $category = null, $date)
+{
+
   $data_site = file_get_contents($host); // получаем страницу сайта-донора
+
 	$document = phpQuery::newDocument($data_site);
 
   if (!empty($parent_elem)) {
@@ -49,9 +79,6 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
     if (empty($link)) $link = $pq->find($prev_link)->attr('data-url');
     if ($link[0] != 'h') $link = $host . $link; // Если путь относительный, добавляем хост
 
-    // Обрезаем время
-    if ($host == 'http://www.rosbalt.ru') $title = substr($title, 5);
-
     if ((isHaveText($link, 'https://ru.tsn.ua/vypusky')) or (isHaveText($link, 'https://ru.tsn.ua/foto'))) $link = null;
 
     // Парсим изображение, если есть
@@ -62,8 +89,6 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
         $img = $pq->find($prev_img)->attr('src');
       }
     }
-
-    echo $title . '<br>';
 
 		if (!empty(trim($title))) {
 
@@ -78,6 +103,17 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
 
 				foreach($content as $element) {
 					$pq2 = pq($element);
+
+          if (isset($date)) {
+            // Разбиваем строку на массив
+            $datePropsArray = explode("|", $date);
+            $date_tag = $datePropsArray[0];
+            $date_attr = $datePropsArray[1];
+            $news_date = formatDate(trim($pq2->find($date_tag)->attr($date_attr)));
+          }
+            elseif (($host == 'https://www.vesti.ru'))  $news_date = formatDate(GetJsonDate($data_link));
+            elseif ($host == 'https://cryptofeed.ru') $news_date = formatDate(trim(strip_tags($pq2->find('div.an-display-time')->html())));
+          if (empty($news_date)) $news_date = date("Y-m-d");;
 
 					if ($host == 'https://ria.ru') {
 						$pq2->find('div.article__media')->replaceWith('');
@@ -193,14 +229,15 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
 
 					$allow_html_tags = '<img><p><h1><td><iframe><video><picture><ol><ul><abbr><dd><code><dl><dt><kbd><s><sup><sub><strike><hr><table><th><li><h1><h2><h3><h4><h5><h6><div><form><pre><blockquote><script><span><b><i><u><strong><em>';
 
-					// Записываем информацию о превьюшках в базу данных
-					$posts = R::dispense('posts');
-					if (!empty($link)) $posts->link = $link;
-					if (!empty($img)) $posts->img = $img;
-					if (!empty($title)) $posts->title = $title;
-					if (!empty($article_text)) $posts->text = strip_tags($article_text, $allow_html_tags);
+          // Записываем информацию о превьюшках в базу данных
+          $posts = R::dispense('posts');
+          if (!empty($link)) $posts->link = $link;
+          if (!empty($img)) $posts->img = $img;
+          if (!empty($title)) $posts->title = $title;
+          if (!empty($article_text)) $posts->text = strip_tags($article_text, $allow_html_tags);
           if (!empty($category)) $posts->category = $category;
-					R::store($posts);
+          if (!empty($news_date)) $posts->date = $news_date;
+          R::store($posts);
         }
 			}
 		}

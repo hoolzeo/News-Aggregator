@@ -18,11 +18,11 @@ $marks = array(
     'item' => '.feed__item',
     'title' => '.b-article h2 span',
     'link' => '.entry_content--short a',
-    'short_img' => 'img',
     'text' => '.b-article',
     'decode' => false,
     'full_img' => '.b-article img',
-    'category' => 'Блокчейн'
+    'category' => 'Блокчейн',
+    'date' => 'time|datetime'
   ),
   array(
     'host' => 'https://www.rbc.ru/crypto/',
@@ -34,7 +34,8 @@ $marks = array(
     'text' => '.article__content p',
     'decode' => false,
     'full_img' => '.article__main-image__link img',
-    'category' => 'Блокчейн'
+    'category' => 'Блокчейн',
+    'date' => 'span[itemprop=datePublished]|content'
   ),
   array(
     'host' => 'https://bloomchain.ru/blockchain-fintech/',
@@ -46,7 +47,8 @@ $marks = array(
     'text' => '.td-post-content',
     'decode' => false,
     'full_img' => '.entry-thumb img',
-    'category' => 'Блокчейн'
+    'category' => 'Блокчейн',
+    'date' => 'time|datetime'
   ),
   array(
     'host' => 'https://www.vedomosti.ru',
@@ -58,7 +60,8 @@ $marks = array(
     'text' => '.b-news-item__text_one',
     'decode' => false,
     'full_img' => '',
-    'category' => ''
+    'category' => '',
+    'date' => 'time|datetime'
   ),
   array(
     'host' => 'https://www.vesti.ru',
@@ -94,7 +97,8 @@ $marks = array(
     'text' => '.text',
     'decode' => false,
     'full_img' => '.fullimg img',
-    'category' => ''
+    'category' => '',
+    'date' => 'time|datetime'
   ),
   array(
     'host' => 'https://ria.ru',
@@ -106,7 +110,8 @@ $marks = array(
     'text' => '.article__body',
     'decode' => true,
     'full_img' => '.photoview__open-info img',
-    'category' => ''
+    'category' => '',
+    'date' => 'time|datetime'
   ),
   array(
     'host' => 'https://ria.ru',
@@ -118,7 +123,8 @@ $marks = array(
     'text' => '.article__body',
     'decode' => true,
     'full_img' => '.photoview__open-info img',
-    'category' => ''
+    'category' => '',
+    'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.belnovosti.by',
@@ -130,7 +136,8 @@ $marks = array(
       'text' => '.field-item p',
       'decode' => false,
       'full_img' => '#content_image_block img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.belnovosti.by',
@@ -142,7 +149,8 @@ $marks = array(
       'text' => '.field-item p',
       'decode' => false,
       'full_img' => '#content_image_block img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://korrespondent.net',
@@ -166,7 +174,8 @@ $marks = array(
       'text' => 'article div[itemprop="articleBody"]',
       'decode' => false,
       'full_img' => '.big_photo__img img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.rbc.ru',
@@ -178,7 +187,8 @@ $marks = array(
       'text' => '.article__content p',
       'decode' => false,
       'full_img' => '.article__main-image__image',
-      'category' => ''
+      'category' => '',
+      'date' => 'span[itemprop=datePublished]|content'
   ),
   array(
       'host' => 'http://www.aif.ru/news',
@@ -190,7 +200,8 @@ $marks = array(
       'text' => '.material_content',
       'decode' => false,
       'full_img' => '.article_img img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'http://www.aif.ru',
@@ -202,7 +213,8 @@ $marks = array(
       'text' => '.material_content',
       'decode' => false,
       'full_img' => '.article_img img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://tass.ru',
@@ -214,7 +226,8 @@ $marks = array(
       'text' => '.text-content',
       'decode' => false,
       'full_img' => '',
-      'category' => ''
+      'category' => '',
+      'date' => 'dateformat|time'
   ),
   array(
       'host' => 'https://vz.ru',
@@ -238,7 +251,8 @@ $marks = array(
       'text' => 'div[itemprop="articleBody"]',
       'decode' => false,
       'full_img' => '.c-article__image img',
-      'category' => ''
+      'category' => '',
+      'date' => 'span[itemprop=datePublished]'
   ),
   array(
       'host' => 'https://ru.tsn.ua',
@@ -250,7 +264,20 @@ $marks = array(
       'text' => '.e-content',
       'decode' => false,
       'full_img' => '',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
+  ),
+  array(
+      'host' => 'https://eadaily.com',
+      'name' => 'EAD',
+      'item' => 'li',
+      'title' => 'a',
+      'link' => 'a',
+      'text' => '.news-text-body',
+      'decode' => false,
+      'full_img' => '',
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://eadaily.com',
@@ -262,19 +289,8 @@ $marks = array(
       'text' => '.news-text-body',
       'decode' => false,
       'full_img' => '',
-      'category' => ''
-  ),
-  array(
-      'host' => 'https://eadaily.com',
-      'name' => 'EAD',
-      'item' => 'li',
-      'title' => 'a',
-      'link' => 'a',
-      'short_img' => '',
-      'text' => '.news-text-body',
-      'decode' => false,
-      'full_img' => '',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.interfax.ru',
@@ -286,7 +302,8 @@ $marks = array(
       'text' => 'article p',
       'decode' => true,
       'full_img' => 'figure.inner img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.interfax.ru',
@@ -298,7 +315,8 @@ $marks = array(
       'text' => 'article p',
       'decode' => true,
       'full_img' => 'figure.inner img',
-      'category' => ''
+      'category' => '',
+      'date' => 'time|datetime'
   ),
   array(
       'host' => 'https://www.interfax.ru',
@@ -310,20 +328,8 @@ $marks = array(
       'text' => 'article p',
       'decode' => true,
       'full_img' => 'figure.inner img',
-      'category' => ''
-  ),
-  array(
-      'host' => 'http://www.rosbalt.ru',
-      'name' => 'РосБалт',
-      'item' => 'li',
-      'title' => 'a',
-      'link' => 'a',
-      'short_img' => '',
-      'text' => '.newstext',
-      'decode' => false,
-      'full_img' => '.image-photo img',
       'category' => '',
-      'parent' => 'ul.topnews-main'
+      'date' => 'time|datetime'
   )
 );
 

@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
 
 //R::wipe('sources');
 
-function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, $post_text, $if_decode, $post_image = null, $category = null)
+function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, $post_text, $if_decode, $post_image = null, $category = null, $date)
 {
   $msg_icon = null;
 
@@ -22,6 +22,7 @@ function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, 
   $sources->decode = $if_decode;
   $sources->full_img = $post_image;
   $sources->category = $category;
+  $sources->date = $date;
   R::store($sources);
 
   // Скачиваем иконку, если её нет на сервере
@@ -38,6 +39,6 @@ function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, 
 
 foreach ($marks as $current_site) {
   $url = GetRootUrl($current_site['host']);
-  MarksDB($current_site['host'], $url, $current_site['name'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category']);
+  MarksDB($current_site['host'], $url, $current_site['name'], $current_site['item'], $current_site['title'], $current_site['link'], $current_site['short_img'], $current_site['text'], $current_site['decode'], $current_site['full_img'], $current_site['category'], $current_site['date']);
 }
 ?>
