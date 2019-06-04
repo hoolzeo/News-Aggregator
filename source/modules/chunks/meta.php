@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <?php
-if ($_COOKIE["night_theme"] == 'yes') {
+if ($_COOKIE["NightCheckBox"] == 'yes') {
   echo '<link rel="stylesheet" id="main_css" href="/css/main_night.css">';
 } else {
   echo '<link rel="stylesheet" id="main_css" href="/css/main.css">';

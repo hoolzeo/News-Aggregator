@@ -3,7 +3,7 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/source_marks.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
 
-//R::wipe('sources');
+R::wipe('sources');
 
 function MarksDB($host, $url, $name, $item, $prev_title, $prev_link, $prev_img, $post_text, $if_decode, $post_image = null, $category = null, $date)
 {

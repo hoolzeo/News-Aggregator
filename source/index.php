@@ -22,8 +22,14 @@ if (($userlogin) and (!empty($stop_words_string))) {
 }
 
 // Формируем ленту
-$sql_sources = unserialize($_COOKIE['allow_sources']);
 $tmpArray = [];
+
+if (count(unserialize($_COOKIE['allow_sources'])) < 1) {
+  $sql_sources = R::getAll("SELECT * FROM sources GROUP BY name");
+} else {
+  $sql_sources = unserialize($_COOKIE['allow_sources']);
+}
+
 foreach ($sql_sources as $current_site) array_push($tmpArray, "'%".$current_site."%'");
 $AndSourceLike = implode(' or link LIKE ', $tmpArray);
 $filter_link = "link LIKE {$AndSourceLike}";

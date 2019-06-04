@@ -13,8 +13,6 @@ if ((!isset($_COOKIE['allow_sources'])) or (count(unserialize($_COOKIE['allow_so
   $emptyCookie = true;
 }
 
-
-
 // Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {
   $userlogin = $_SESSION['logged_user']->login;

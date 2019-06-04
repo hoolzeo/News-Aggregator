@@ -1,6 +1,6 @@
 <aside>
   <div class="night-theme upgrade-checkbox">
-    Ночная тема <input type="checkbox" id="nightTheme" <?php if ((isset($_COOKIE['night_theme'])) && ($_COOKIE["night_theme"] == 'yes')) echo "checked"; ?>>
+    Ночная тема <input type="checkbox" id="nightTheme" <?php if ((isset($_COOKIE['NightCheckBox'])) && ($_COOKIE["NightCheckBox"] == 'yes')) echo "checked"; ?>>
   </div>
 
   <div class="cabinet">
@@ -19,15 +19,21 @@
     <div class="block-title">Популярные теги</div>
     <div class="tags">
       <div>Путин</div>
-      <div>Нотр-Дам-де-Пари</div>
-      <div>Иосиф Виссарионович Сталин</div>
+      <div>Сталин</div>
       <div>Россия</div>
-      <div>Ювентус</div>
-      <div>Аякс</div>
-      <div>Владимир Александрович Зеленский</div>
-      <div>Олег Владимирович Дерипаска</div>
-      <div>Пётр Алексеевич Порошенко</div>
-      <div>Лига чемпионов УЕФА</div>
+      <div>Украина</div>
+      <div>Футбол</div>
+      <div>Зеленский</div>
+      <div>Дерипаска</div>
+      <div>Порошенко</div>
+      <div>Кардашьян</div>
+      <div>Смартфон</div>
+      <div>Биткоин</div>
+      <div>Google</div>
+      <div>Япония</div>
+      <div>США</div>
+      <div>Трамп</div>
+
     </div>
   </div>
 </aside>
@@ -42,10 +48,11 @@ $(function() {
   $( "#nightTheme" ).click(function() {
     if ($('#nightTheme').is(':checked')){
         $("#main_css").attr("href", "/css/main_night.css");
-        $.post("/test.php", { NightCheckBox: "yes" } );
+        $.post("/set_cookie.php", { NightCheckBox: "yes" } );
+
     } else {
         $("#main_css").attr("href", "/css/main.css");
-        $.post("/test.php", { NightCheckBox: "no" } );
+        $.post("/set_cookie.php", { NightCheckBox: "no" } );
     }
   });
 });
