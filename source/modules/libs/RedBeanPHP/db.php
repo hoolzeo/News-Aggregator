@@ -1,8 +1,6 @@
 <?php
-//require '/modules/libs/RedBeanPHP/rb.php';
-
 require "rb.php";
-R::setup( 'mysql:host=194.67.197.14;dbname=newz','user', 'user' );
+R::setup( 'mysql:host='.$db_host.';dbname='.$db_name, $db_login, $db_password);
 
 if ( !R::testconnection() )
 {

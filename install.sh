@@ -13,7 +13,6 @@
 
 # Установка Gulp и пакетов в проект
 npm install gulp
-npm install gulp
 npm install gulp-watch --save-dev
 npm install gulp-minify-css --save-dev
 npm install gulp-clean --save-dev

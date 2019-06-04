@@ -1,4 +1,5 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'].'/modules/config.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
 mb_internal_encoding("UTF-8");
