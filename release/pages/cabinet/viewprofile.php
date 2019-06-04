@@ -64,7 +64,6 @@ END;
 ?>
 
       <br><hr>
-      <li><a href="/pages/admin/index.php">Админ-панель</a></li>
 
       <h2>Комментарии пользователя</h2>
       <?php

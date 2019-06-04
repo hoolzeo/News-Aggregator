@@ -4,11 +4,21 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
 mb_internal_encoding("UTF-8");
 
+// Если куков нет - добавляем все источники в куки
+if ((!isset($_COOKIE['allow_sources'])) or (count(unserialize($_COOKIE['allow_sources'])) == 0)) {
+  $ArrayUserSources = [];
+  $sql_sources = R::getAll("SELECT * FROM sources GROUP BY name");
+  foreach ($sql_sources as $current_site) array_push ($ArrayUserSources, $current_site['url']);
+  Setcookie("allow_sources", serialize($ArrayUserSources));
+  $emptyCookie = true;
+}
+
+
+
 // Если пользователь авторизован - получаем его логин и ID
 if ( isset ($_SESSION['logged_user']) ) {
   $userlogin = $_SESSION['logged_user']->login;
-  $userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$userlogin.'"');
-
+  $userID = R::findOne('users', 'login = ?', [$userlogin])['id'];
   $getStopWords = R::getAll( 'SELECT `stop_words` FROM `users` WHERE `login` = "'.$userlogin.'" LIMIT 1' );
   $stop_words_string = $getStopWords[0]['stop_words'];
 
@@ -92,5 +102,11 @@ function PrintArray($array) {
   echo '<pre>';
   print_r($array);
   echo '</pre>';
+}
+
+function str_replace_once($search, $replace, $text)
+{
+   $pos = strpos($text, $search);
+   return $pos!==false ? substr_replace($text, $replace, $pos, strlen($search)) : $text;
 }
 ?>

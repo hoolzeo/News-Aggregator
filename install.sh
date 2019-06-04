@@ -20,3 +20,4 @@ npm install gulp-less --save-dev
 npm install path --save-dev
 npm install gulp-concat --save-dev
 npm install gulp-autoprefixer --save-dev
+npm install gulp-imagemin --save-dev

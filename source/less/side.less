@@ -1,7 +1,9 @@
+@side-block-margin-bottom: 15px;
+
 .block-tags {
   background: #fff;
   padding: 10px 15px;
-  margin-bottom: 15px;
+  margin-bottom: @side-block-margin-bottom;
   box-shadow: @shadow-block;
 
   .block-title {
@@ -53,11 +55,34 @@
   padding: 15px 20px;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: @side-block-margin-bottom;
   font-size: 17px;
 
   input {
     margin-left: 10px;
     cursor: pointer;
+  }
+}
+
+.cabinet {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: @side-block-margin-bottom;
+
+  a {
+    width: 100%;
+    background: @color-main;
+    border: 1px solid @color-main;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 7px 10px;
+
+    &:hover {
+      background: white;
+      color: @color-main;
+      transition: 0.15s all;
+
+    }
   }
 }

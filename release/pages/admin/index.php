@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
 ?>
 
 <!DOCTYPE html>

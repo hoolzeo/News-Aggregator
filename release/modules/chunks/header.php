@@ -11,7 +11,7 @@
       </ul>
     </nav>
     <div class="settings">
-      <a href="#"><i class="fa fa-cog"></i> Настройка ленты</a>
+      <a href="/sources_sets.php"><i class="fa fa-cog"></i> Настройка ленты</a>
     </div>
   </div>
 </header>

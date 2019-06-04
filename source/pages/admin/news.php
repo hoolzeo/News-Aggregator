@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/modules/require_libs.php';
+require $_SERVER['DOCUMENT_ROOT'].'/modules/guard_admin.php';
 
 $countView = 50; // количество материалов на странице
 
@@ -12,7 +13,7 @@ if(isset($_GET['page'])){
 $startIndex = ($pageNum-1)*$countView; // с какой записи начать выборку
 
 // Получаем посты
-$sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` ORDER BY id DESC LIMIT $startIndex, $countView");
+$sql = R::getAll( "SELECT SQL_CALC_FOUND_ROWS * FROM `posts` ORDER BY link DESC LIMIT $startIndex, $countView");
 
 // получение полного количества новостей
 $countAllNews = R::count( 'posts' );

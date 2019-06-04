@@ -36,15 +36,26 @@ if ( isset($data['do_login']) )
   <?php require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php'; ?>
 
   <div class="wrapper container">
-    <main id="sources">
+    <main>
       <h1>Авторизация</h1>
 
 			<form action="login.php" method="POST">
-				<strong>Логин</strong>
-				<input type="text" name="login" value="<?php echo @$data['login']; ?>"><br/>
 
-				<strong>Пароль</strong>
-				<input type="password" name="password" value="<?php echo @$data['password']; ?>"><br/>
+				<style media="screen">
+
+
+
+				</style>
+
+				<div class="input-block">
+					<strong>Логин</strong>
+					<input type="text" name="login" value="<?php echo @$data['login']; ?>"><br/>
+				</div>
+
+				<div class="input-block">
+					<strong>Пароль</strong>
+					<input type="password" name="password" value="<?php echo @$data['password']; ?>"><br/>
+				</div>
 
 				<button type="submit" name="do_login">Войти</button>
 			</form>

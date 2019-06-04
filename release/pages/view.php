@@ -12,6 +12,9 @@ if(isset($_GET['id'])) {
       $title = $post['title'];
       $image = $post['img'];
       $text = $post['text'];
+      $link = $post['link'];
+      $source = getSourceInfo($link, 'name');
+      $date = $post['date'];
     }
   } else {
     header( "HTTP/1.1 404 Not Found" );
@@ -36,14 +39,22 @@ if(isset($_GET['id'])) {
     <main id="page_post">
 
 <h1><?php echo $title ?></h1>
-<div class="estimated-time"> <i class="fa fa-clock-o"></i> <?php echo "Приблизительное время чтения: " . read_time_estimate($text);?> </div>
+
+<div class="post-icons">
+  <div class="post-icon post-icons__date"> <i class="fa fa-calendar"></i> <?php echo date("d.m.Y", strtotime($date)); ?></div>
+  <div class="post-icon post-icons__source"> <i class="fa fa-newspaper-o"></i><?php echo '<a href="'.$link.'" target="_blank">'.$source.'</a>'; ?></div>
+  <div class="post-icon post-icons__time"> <i class="fa fa-clock-o"></i> Приблизительное время чтения: <?php echo read_time_estimate($text);?> </div>
+</div>
 
 <?php if(!empty($image)) { ?>
 <div class="post-image"> <img src="<?php echo $image ?>"> </div>
 <?php } ?>
 
+<div class="text"><?php
+echo $text;
+?>
 
-<div class="text"><?php echo $text ?></div>
+</div>
 
 <div class="comments">
 
@@ -70,8 +81,6 @@ if(isset($_GET['id'])) {
 
 <?php
 
-echo $date;
-
   $page_id = $news_id;// Уникальный идентификатор страницы (статьи или поста)
 
   $comments = R::getAll( "SELECT * FROM `comments` WHERE `page_id`='$page_id'" );
@@ -83,7 +92,7 @@ echo $date;
 
       // Это коммент от авторизованного пользователя?
       if ($comment['auth'] == 1) {
-        $comment_userID = R::exec('SELECT `id` FROM `users` WHERE `login` = "'.$comment_login.'"');
+        $comment_userID = R::findOne('users', 'login = ?', [$comment_login])['id'];
         echo '<a class="comment_profile_link" href="/pages/cabinet/viewprofile.php?id=' . $comment_userID . ' ">' . $comment_login . '</a>';
       } else {
         echo $comment_login;
