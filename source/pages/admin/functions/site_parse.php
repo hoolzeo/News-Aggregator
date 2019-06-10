@@ -69,7 +69,6 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
 		$pq = pq($el); // pq это аналог $ в jQuery
 		$title = trim(strip_tags($pq->find($prev_title))); // парсим заголовок статьи
 
-
 		if ($if_decode) {
 			//$title = utf8_decode($title);
       $title = iconv('windows-1251', 'utf-8', $title);
@@ -90,9 +89,9 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
       }
     }
 
-		if (!empty(trim($title))) {
+		if ((!empty(trim($title))) and (!empty(trim($link)))) {
 
-			$havePost = R::count("posts", "title like ?", [$title]);
+			$havePost = R::count("posts", "link = ?", [$link]);
 
 			if (!(bool)$havePost) {
 
