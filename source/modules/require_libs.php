@@ -2,6 +2,7 @@
 require $_SERVER['DOCUMENT_ROOT'].'/modules/config.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
+error_reporting(0); // Проект в бете, не мазолим глаза юзерам
 mb_internal_encoding("UTF-8");
 
 // Если куков нет - добавляем все источники в куки
@@ -38,7 +39,7 @@ function getSourceInfo($source, $column) {
 
 function outputLinksPost($id, $title, $source) {
   echo '<li id="'.$id.'"><a href="/pages/view.php?id='.$id.'">';
-	echo '<div class="source-icon"><img src="/images/icons/sites/16/'.GetRootUrl($source).'.ico"></div>';
+	echo '<div class="source-icon"><img src="/images/icons/sites/16/'.CutSubDomain(GetRootUrl($source)).'.ico"></div>';
   echo '    <div class="title">'.$title.'</div>';
   echo '  </a></li>';
 }
@@ -57,6 +58,12 @@ function outputImagePost($id, $title, $image, $source) {
   echo '   </div>';
   echo '   <div class="cart-title done"><a href="/pages/view.php?id='.$id.'">'.$title.'</a></div>';
   echo '   </div>';
+}
+
+function CutSubDomain($domain) {
+  $words = explode('.', $domain);
+  if (sizeof($words) < 2) throw new RuntimeException('Provided URL doesn\'t contain second-level domain');
+  return implode('.', array_slice($words, -2));
 }
 
 function GetRootUrl($link) {
