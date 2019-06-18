@@ -98,15 +98,11 @@ require $_SERVER['DOCUMENT_ROOT'].'/modules/chunks/header.php';
       <ul class="pagination">
           <?php if($pageNum > 1) { ?>
               <li><a href="/pages/admin/news.php?page=1">&lt;&lt;</a></li>
-              <li><a href="/pages/admin/news.php?page=<?=$pageNum-1;?>">&lt;</a></li>
-          <?php } ?>
-
-          <?php for($i = 1; $i<=$lastPage; $i++) { ?>
-              <li <?=($i == $pageNum) ? 'class="active"' : '';?>> <a href="/pages/admin/news.php?page=<?=$i;?>"><?=$i;?></a> </li>
+              <li><a href="/pages/admin/news.php?page=<?=$pageNum-1;?>">Назад</a></li>
           <?php } ?>
 
           <?php if($pageNum < $lastPage) { ?>
-              <li><a href="/pages/admin/news.php?page=<?=$pageNum+1;?>">&gt;</a></li>
+              <li><a href="/pages/admin/news.php?page=<?=$pageNum+1;?>">Вперёд</a></li>
               <li><a href="/pages/admin/news.php?page=<?=$lastPage;?>">&gt;&gt;</a></li>
           <?php } ?>
       </ul>

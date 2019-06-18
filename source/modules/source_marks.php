@@ -295,32 +295,6 @@ $marks = array(
   array(
       'host' => 'https://www.interfax.ru',
       'name' => 'Интерфакс',
-      'item' => '.timeline__text',
-      'title' => 'h3',
-      'link' => 'a',
-      'short_img' => '',
-      'text' => 'article p',
-      'decode' => true,
-      'full_img' => 'figure.inner img',
-      'category' => '',
-      'date' => 'time|datetime'
-  ),
-  array(
-      'host' => 'https://www.interfax.ru',
-      'name' => 'Интерфакс',
-      'item' => '.timeline__group',
-      'title' => 'h3',
-      'link' => 'a',
-      'short_img' => '',
-      'text' => 'article p',
-      'decode' => true,
-      'full_img' => 'figure.inner img',
-      'category' => '',
-      'date' => 'time|datetime'
-  ),
-  array(
-      'host' => 'https://www.interfax.ru',
-      'name' => 'Интерфакс',
       'item' => '.timeline__photo',
       'title' => 'h3',
       'link' => 'a',
@@ -330,7 +304,34 @@ $marks = array(
       'full_img' => 'figure.inner img',
       'category' => '',
       'date' => 'time|datetime'
+  ),
+  array(
+      'host' => 'https://www.interfax.ru',
+      'name' => 'Интерфакс',
+      'item' => '.timeline__text',
+      'title' => 'h3',
+      'link' => 'a',
+      'short_img' => '',
+      'text' => 'article p',
+      'decode' => true,
+      'full_img' => 'figure.inner img',
+      'category' => '',
+      'date' => 'time|datetime'
   )
+);
+
+$zalupa = array(
+    'host' => 'https://www.interfax.ru',
+    'name' => 'Интерфакс',
+    'item' => '.timeline__group',
+    'title' => 'h3',
+    'link' => 'a',
+    'short_img' => '',
+    'text' => 'article p',
+    'decode' => true,
+    'full_img' => 'figure.inner img',
+    'category' => '',
+    'date' => 'time|datetime'
 );
 
 $fonatka = array( //charset

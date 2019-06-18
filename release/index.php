@@ -81,7 +81,7 @@ $lastPage = ceil($countAllNews/$countView);
         </ul>
       </div>
 
-      <h1>Главные новости за сегодня</h1>
+      <h1>Свежие новости за сегодня</h1>
       <div class="news-list">
         <!-- вывод новостей -->
         <?php foreach($sql as $post) {

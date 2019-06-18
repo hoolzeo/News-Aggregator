@@ -166,6 +166,10 @@ function SiteParse($host, $item, $prev_title, $prev_link, $post_text, $if_decode
             $pq2->find('figure.figure')->replaceWith('');
           }
 
+          if ($host == 'https://bitok.blog') {
+            $pq2->find('p')->find('img')->replaceWith('');
+          }
+
           if ($host == 'https://www.vedomosti.ru') {
 						// В ведомостях идёт вывод нескольких новостей с одним и тем же тегом. Убираем первый, остальное вырезаем
 						$article_text = str_replace_once('b-news-item__text_one', '', $article_text);
