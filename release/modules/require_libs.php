@@ -1,5 +1,4 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/modules/config.php';
 require $_SERVER['DOCUMENT_ROOT'].'/modules/libs/RedBeanPHP/db.php';
 
 error_reporting(0); // Проект в бете, не мазолим глаза юзерам

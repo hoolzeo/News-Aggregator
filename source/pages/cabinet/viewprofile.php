@@ -68,12 +68,19 @@ END;
       <h2>Комментарии пользователя</h2>
       <?php
         $comments = R::getAll( "SELECT * FROM `comments` WHERE `name`='$login' and `auth` = 1 " );
+
         foreach ($comments as $comment) { ?>
+          <?php
+            $page_id = $comment['page_id'];
+            $sql_post = R::getAll( "SELECT `title` FROM `posts` WHERE `id`='$page_id'" );
+            $page_title = $sql_post[0]['title'];
+          ?>
           <div class="comment">
           <div class="comment_top"
           ><b> <?php echo $comment['name']; ?></b> <span class="comm_time"><?php echo str_replace('-','.',$comment['date']) ?></span></div>
-          <div class="comment_message_in"><?php echo $comment['message'] ?>
-          </div>
+          <div class="comment_message_in"><?php echo $comment['message'] ?></div>
+
+          <div class="comment_link_post">Новость: <a class="link-blue" href="/pages/view.php?id=<?php echo $page_id ?>"><?php echo $page_title ?></a></div>
           </div>
         <?php } ?>
 

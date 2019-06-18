@@ -1,4 +1,5 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'].'/modules/config.php';
 require "rb.php";
 R::setup( 'mysql:host='.$db_host.';dbname='.$db_name, $db_login, $db_password);
 

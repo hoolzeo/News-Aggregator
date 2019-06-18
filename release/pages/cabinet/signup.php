@@ -77,12 +77,12 @@
 			$user->email = $data['email'];
 			$user->password = password_hash($data['password'], PASSWORD_DEFAULT); //пароль нельзя хранить в открытом виде, мы его шифруем при помощи функции password_hash для php > 5.6
 			R::store($user);
-			echo '<div style="color:dreen;">Вы успешно зарегистрированы!</div><hr>';
-		}else
+			ShowMessage('Вы успешно зарегистрированы!');
+			header('Location: /');
+		} else
 		{
-			echo '<div id="errors" style="color:red;">' .array_shift($errors). '</div><hr>';
+			ShowMessage(array_shift($errors));
 		}
-
 	}
 
 ?>

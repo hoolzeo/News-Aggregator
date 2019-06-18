@@ -10,7 +10,7 @@
         <li><a href="/pages/search.php">Поиск новостей</a></li>
         <li><a href="/pages/copyright.php">Правообладателям</a></li>
         <li><a href="/pages/sources.php">Список источников</a></li>
-        <li><a href="/pages/admin/index.php">Обратная связь</a></li>
+        <li><a href="/pages/feedback.php">Обратная связь</a></li>
       </ul>
     </nav>
     <div class="settings">
